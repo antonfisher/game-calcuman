@@ -1,0 +1,13 @@
+{
+  "name": "game-calcuman",
+  "version": "1.0.0",
+  "author": "Anton Fisher <a.fschr@gmail.com> (http://antonfisher.com)",
+  "description": "React Native simple math game",
+  "scripts": {
+    "emulator": "emulator -list-avds && emulator @Nexus_5"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "react-native-cli": "^1.0.0"
+  }
+}
