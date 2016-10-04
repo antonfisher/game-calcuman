@@ -54,20 +54,22 @@ export default class ToggleButton extends Component {
   }
 
   render () {
-    let style = styles.container
+    let styleContainer = styles.container
     if (this.props.disabled) {
-      style = styles.containerDisabled
+      styleContainer = styles.containerDisabled
     } else if (this.state.pressed) {
-      style = styles.containerPressed
+      styleContainer = styles.containerPressed
     }
+
+    let styleText = (this.props.disabled ? styles.textDisabled : styles.text)
 
     return (
       <TouchableHighlight
-        style={style}
+        style={styleContainer}
         onPress={this._onButtonPress}
         disabled={this.props.disabled}>
         <View allowFontScaling={true}>
-          <Text style={styles.text} allowFontScaling={true}>
+          <Text style={styleText} allowFontScaling={true}>
             {this.props.value}
           </Text>
         </View>
@@ -110,11 +112,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
-    padding: 10,
-    margin: 10
+    padding: 5,
+    margin: 25
   },
   text: {
     fontSize: 60,
     color: 'darkslategray'
+  },
+  textDisabled: {
+    fontSize: 1,
+    color: 'lightgray'
   }
 })

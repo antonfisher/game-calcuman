@@ -65,17 +65,6 @@ export default class CalcuManLayout extends Component {
   }
 
   generateNewGame () {
-    this.setState({
-      targetNum: Math.round(Math.random() * 20),
-      values: new Array(9).fill().map((i, k) => Math.round(Math.random() * 10)),
-      sum: 0,
-      isWin: false,
-      isLose: false,
-      gameOver: false
-    })
-  }
-
-  componentWillMount () {
     LayoutAnimation.configureNext({
       duration: 100,
       create: {
@@ -89,6 +78,17 @@ export default class CalcuManLayout extends Component {
       }
     })
 
+    this.setState({
+      targetNum: Math.round(Math.random() * 20),
+      values: new Array(9).fill().map((i, k) => Math.round(Math.random() * 10)),
+      sum: 0,
+      isWin: false,
+      isLose: false,
+      gameOver: false
+    })
+  }
+
+  componentWillMount () {
     this.generateNewGame()
   }
 
