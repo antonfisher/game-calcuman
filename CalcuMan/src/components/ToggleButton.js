@@ -18,14 +18,13 @@ export default class ToggleButton extends Component {
     super(props)
 
     this.state = {
-      pressed: false,
-      value: props.value
+      pressed: false
     }
 
     this._onButtonPress = this._onButtonPress.bind(this)
   }
 
-  _onButtonPress (index) {
+  _onButtonPress () {
     LayoutAnimation.configureNext({
       duration: 200,
       update: {
@@ -35,20 +34,41 @@ export default class ToggleButton extends Component {
       }
     })
 
-    console.log('-- button pressed', arguments)
-
     this.setState({
       pressed: !this.state.pressed
     })
+
+    if (this.state.pressed) {
+      this.props.onUp(this.props.value)
+    } else {
+      this.props.onDown(this.props.value)
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.pressed && prevProps.disabled && !this.props.disabled) {
+      this.setState({
+        pressed: false
+      })
+    }
   }
 
   render () {
-    const style = (this.state.pressed ? styles.containerPressed : styles.container)
+    let style = styles.container
+    if (this.props.disabled) {
+      style = styles.containerDisabled
+    } else if (this.state.pressed) {
+      style = styles.containerPressed
+    }
+
     return (
-      <TouchableHighlight style={style} onPress={this._onButtonPress}>
+      <TouchableHighlight
+        style={style}
+        onPress={this._onButtonPress}
+        disabled={this.props.disabled}>
         <View allowFontScaling={true}>
           <Text style={styles.text} allowFontScaling={true}>
-            {this.state.value}
+            {this.props.value}
           </Text>
         </View>
       </TouchableHighlight>
@@ -57,10 +77,12 @@ export default class ToggleButton extends Component {
 }
 
 ToggleButton.propTypes = {
-  value: React.PropTypes.string
+  value: React.PropTypes.number,
+  disabled: React.PropTypes.bool
 }
 ToggleButton.defaultProps = {
-  value: '-'
+  value: 0,
+  disabled: true
 }
 
 const styles = StyleSheet.create({
@@ -76,6 +98,15 @@ const styles = StyleSheet.create({
   containerPressed: {
     flex: 1,
     backgroundColor: 'orange',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    padding: 10,
+    margin: 10
+  },
+  containerDisabled: {
+    flex: 1,
+    backgroundColor: 'lightgray',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
