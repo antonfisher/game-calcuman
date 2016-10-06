@@ -14,6 +14,20 @@ import {
 } from 'react-native'
 
 export default class ToggleButton extends Component {
+  static get defaultProps() {
+    return {
+      value: 0,
+      disabled: true
+    }
+  }
+
+  static get propTypes() {
+    return {
+      value: React.PropTypes.number,
+      disabled: React.PropTypes.bool
+    }
+  }
+
   constructor (props) {
     super(props)
 
@@ -76,15 +90,6 @@ export default class ToggleButton extends Component {
       </TouchableHighlight>
     )
   }
-}
-
-ToggleButton.propTypes = {
-  value: React.PropTypes.number,
-  disabled: React.PropTypes.bool
-}
-ToggleButton.defaultProps = {
-  value: 0,
-  disabled: true
 }
 
 const styles = StyleSheet.create({

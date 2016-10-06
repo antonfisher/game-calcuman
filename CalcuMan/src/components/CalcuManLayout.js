@@ -19,11 +19,23 @@ import TimerMixin from 'react-timer-mixin'
 import ToggleButton from './ToggleButton'
 
 export default class CalcuManLayout extends Component {
+  static get defaultProps () {
+    return {
+      targetNum: 9
+    }
+  }
+
+  static get propTypes() {
+    return {
+      targetNum: React.PropTypes.number
+    }
+  }
+
   constructor (props) {
     super(props)
 
     this.state = {
-      targetNum: 0,
+      targetNum: props.targetNum,
       values: new Array(9).fill(0),
       sum: 0,
       isWin: false,
@@ -79,7 +91,7 @@ export default class CalcuManLayout extends Component {
     })
 
     this.setState({
-      targetNum: Math.round(Math.random() * 20),
+      targetNum: (this.state.targetNum + 1),
       values: new Array(9).fill().map((i, k) => Math.round(Math.random() * 10)),
       sum: 0,
       isWin: false,
