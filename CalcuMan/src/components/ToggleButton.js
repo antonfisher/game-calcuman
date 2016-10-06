@@ -14,14 +14,14 @@ import {
 } from 'react-native'
 
 export default class ToggleButton extends Component {
-  static get defaultProps() {
+  static get defaultProps () {
     return {
       value: 0,
       disabled: true
     }
   }
 
-  static get propTypes() {
+  static get propTypes () {
     return {
       value: React.PropTypes.number,
       disabled: React.PropTypes.bool
@@ -82,8 +82,8 @@ export default class ToggleButton extends Component {
         style={styleContainer}
         onPress={this._onButtonPress}
         disabled={this.props.disabled}>
-        <View allowFontScaling={true}>
-          <Text style={styleText} allowFontScaling={true}>
+        <View allowFontScaling>
+          <Text style={styleText} allowFontScaling>
             {this.props.value}
           </Text>
         </View>

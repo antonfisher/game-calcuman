@@ -9,8 +9,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  TouchableHighlight,
   LayoutAnimation
 } from 'react-native'
 import reactMixin from 'react-mixin'
@@ -25,7 +23,7 @@ export default class CalcuManLayout extends Component {
     }
   }
 
-  static get propTypes() {
+  static get propTypes () {
     return {
       targetNum: React.PropTypes.number
     }
@@ -59,7 +57,7 @@ export default class CalcuManLayout extends Component {
       return
     }
 
-    if (this.state.sum == this.state.targetNum) {
+    if (this.state.sum === this.state.targetNum) {
       this.setState({
         isWin: true,
         gameOver: true
@@ -158,7 +156,7 @@ reactMixin.onClass(CalcuManLayout, TimerMixin)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'azure',
+    backgroundColor: 'azure'
   },
   targetNumberContainer: {
     flex: 3,

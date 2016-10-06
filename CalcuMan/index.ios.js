@@ -5,11 +5,15 @@
  */
 
 import React, {Component} from 'react'
-import {AppRegistry} from 'react-native'
+import {AppRegistry, UIManager} from 'react-native'
 import CalcuManLayout from './src/components/CalcuManLayout'
 
+if (UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true)
+}
+
 class CalcuMan extends Component {
-  render() {
+  render () {
     return (
       <CalcuManLayout />
     )

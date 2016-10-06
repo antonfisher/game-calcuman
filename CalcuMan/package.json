@@ -1,11 +1,19 @@
 {
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "./node_modules/.bin/standard | ./node_modules/.bin/snazzy",
+    "lint:fix": "./node_modules/.bin/standard --fix",
+    "flow": "./node_modules/.bin/flow check"
   },
   "dependencies": {
     "react": "15.3.2",
-    "react-mixin": "^2.0.2",
+    "react-mixin": "2.0.2",
     "react-native": "0.34.1",
-    "react-timer-mixin": "^0.13.3"
+    "react-timer-mixin": "0.13.3"
+  },
+  "devDependencies": {
+    "flow-bin": "0.33.0",
+    "snazzy": "5.0.0",
+    "standard": "8.3.0"
   }
 }

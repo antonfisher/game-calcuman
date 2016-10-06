@@ -13,7 +13,7 @@ if (UIManager.setLayoutAnimationEnabledExperimental) {
 }
 
 class CalcuMan extends Component {
-  render() {
+  render () {
     return (
       <CalcuManLayout />
     )
