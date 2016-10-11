@@ -13,10 +13,6 @@ import {
 import ToggleButton from './ToggleButton'
 
 export default class MenuLayout extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     return (
       <View style={styles.container}>
