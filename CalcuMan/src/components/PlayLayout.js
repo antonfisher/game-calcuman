@@ -9,7 +9,8 @@ import {
   StyleSheet,
   Text,
   View,
-  LayoutAnimation
+  LayoutAnimation,
+  TouchableHighlight
 } from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
@@ -43,12 +44,12 @@ export default class PlayLayout extends Component {
   }
 
   incSum (value) {
-    this.state.sum += value
+    this.state.sum += Number(value)
     this.checkGameState()
   }
 
   decSum (value) {
-    this.state.sum -= value
+    this.state.sum -= Number(value)
     this.checkGameState()
   }
 
@@ -110,6 +111,9 @@ export default class PlayLayout extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.topBar}>
+          {this.renderBackButton()}
+        </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
             {this.state.targetNum}
@@ -140,11 +144,22 @@ export default class PlayLayout extends Component {
   renderGridRowButton (valuesIndex) {
     return (
       <ToggleButton
-        value={this.state.values[valuesIndex]}
+        value={this.state.values[valuesIndex].toString()}
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
         disabled={this.state.gameOver}
       />
+    )
+  }
+
+  renderBackButton () {
+    return (
+      <TouchableHighlight
+        onPress={this.props.navigator.pop}
+        underlayColor={'gold'}
+        style={styles.topBarBackButton}>
+        <Text style={styles.topBarBackButtonText}>&larr;</Text>
+      </TouchableHighlight>
     )
   }
 }
@@ -157,14 +172,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'azure'
   },
   targetNumberContainer: {
-    flex: 3,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
   targetNumberText: {
     fontSize: 120,
     margin: 20,
-    marginTop: 30,
+    marginTop: 0,
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 5,
     textShadowColor: '#aaaaaa'
@@ -194,6 +209,23 @@ const styles = StyleSheet.create({
   gridRow: {
     flex: 1,
     flexDirection: 'row'
+  },
+  topBar: {
+    height: 60,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 10
+  },
+  topBarBackButton: {
+    borderRadius: 15,
+    marginLeft: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 12
+  },
+  topBarBackButtonText: {
+    fontSize: 30
   },
   bottomBar: {
     height: 60,

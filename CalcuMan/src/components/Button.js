@@ -9,14 +9,16 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
-  LayoutAnimation
+  LayoutAnimation,
+  TouchableHighlight
 } from 'react-native'
+import reactMixin from 'react-mixin'
+import TimerMixin from 'react-timer-mixin'
 
-export default class ToggleButton extends Component {
+export default class Button extends Component {
   static get defaultProps () {
     return {
-      value: '-',
+      value: '',
       disabled: true
     }
   }
@@ -40,7 +42,7 @@ export default class ToggleButton extends Component {
 
   _onPressButton () {
     LayoutAnimation.configureNext({
-      duration: 200,
+      duration: 300,
       update: {
         type: LayoutAnimation.Types.spring,
         property: LayoutAnimation.Properties.scaleXY,
@@ -49,31 +51,22 @@ export default class ToggleButton extends Component {
     })
 
     this.setState({
-      pressed: !this.state.pressed
+      pressed: true
     })
 
-    if (this.state.pressed) {
-      this.props.onUp(this.props.value)
-    } else {
-      this.props.onDown(this.props.value)
-    }
-  }
+    this.setTimeout(() => this.state.pressed = false, 100)
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState.pressed && prevProps.disabled && !this.props.disabled) {
-      this.setState({
-        pressed: false
-      })
-    }
+    this.props.onPress()
   }
 
   render () {
-    const styleText = (this.props.disabled ? styles.textDisabled : styles.text)
-
+    let styleText = styles.text
     let styleContainer = styles.container
     if (this.props.disabled) {
+      styleText = styles.textDisabled
       styleContainer = styles.containerDisabled
     } else if (this.state.pressed) {
+      styleText = styles.textPressed
       styleContainer = styles.containerPressed
     }
 
@@ -81,8 +74,8 @@ export default class ToggleButton extends Component {
       <TouchableHighlight
         style={styleContainer}
         onPress={this._onPressButton}
-        disabled={this.props.disabled}
-        underlayColor={'gold'}>
+        underlayColor={'gold'}
+        disabled={this.props.disabled}>
         <Text style={styleText} allowFontScaling>
           {this.props.value}
         </Text>
@@ -91,24 +84,26 @@ export default class ToggleButton extends Component {
   }
 }
 
+reactMixin.onClass(Button, TimerMixin)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'lightskyblue',
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: 'orange',
+    borderWidth: 5,
     borderRadius: 5,
     padding: 5,
     margin: 15
   },
   containerPressed: {
     flex: 1,
-    backgroundColor: 'orange',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 3,
-    padding: 10,
-    margin: 10
+    backgroundColor: 'white',
+    borderColor: 'white',
+    height: 1,
+    width: 1
   },
   containerDisabled: {
     flex: 1,
@@ -120,8 +115,12 @@ const styles = StyleSheet.create({
     margin: 25
   },
   text: {
-    fontSize: 60,
+    fontSize: 50,
     color: 'darkslategray'
+  },
+  textPressed: {
+    fontSize: 1,
+    color: 'white'
   },
   textDisabled: {
     fontSize: 1,
