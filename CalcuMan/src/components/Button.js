@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'orange',
-    borderWidth: 5,
-    borderRadius: 5,
+    borderRadius: 13,
+    borderWidth: 9,
     padding: 5,
     margin: 15
   },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     margin: 25
   },
   text: {
-    fontSize: 50,
+    fontSize: 60,
     color: 'darkslategray'
   },
   textPressed: {

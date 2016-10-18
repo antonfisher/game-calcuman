@@ -87,15 +87,43 @@ export default class PlayLayout extends Component {
       }
     })
 
+    const targetNum = (this.state.targetNum + 1);
+
+    const values = new Array(9).fill(0);
+    const k = Math.floor(2 + 7 * Math.random());
+    for (let i = 0; i < 9; i++) {
+      values[i] = (targetNum - values.reduce((a, b) => a + b, 0))
+      if (i <= k && values[i] > 0) {
+        if (i < k && values[i] > 2) {
+          values[i] = Math.max(1, Math.ceil(0.6 * Math.random() * values[i]))
+        }
+      } else {
+        values[i] = Math.max(1, Math.ceil(Math.random() * targetNum))
+      }
+    }
+
     this.setState({
-      targetNum: (this.state.targetNum + 1),
-      values: new Array(9).fill().map((i, k) => Math.round(Math.random() * 10)),
+      targetNum,
+      values: this.arrayShuffle(values),
       sum: 0,
       isWin: false,
       isLose: false,
       gameOver: false
     })
   }
+
+  arrayShuffle (arr) {
+    let counter = arr.length;
+    while (counter > 0) {
+      let index = Math.floor(Math.random() * counter);
+      counter--;
+      let temp = arr[counter];
+      arr[counter] = arr[index];
+      arr[index] = temp;
+    }
+    return arr;
+  }
+
 
   componentWillMount () {
     this.generateNewGame()
