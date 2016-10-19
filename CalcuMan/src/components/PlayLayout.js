@@ -16,6 +16,8 @@ import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
 import ToggleButton from './ToggleButton'
+import arrayShuffle from '../functions/arrayShuffle.js'
+import generateValues from '../functions/generateValues.js'
 
 export default class PlayLayout extends Component {
   static get defaultProps () {
@@ -89,41 +91,15 @@ export default class PlayLayout extends Component {
 
     const targetNum = (this.state.targetNum + 1);
 
-    const values = new Array(9).fill(0);
-    const k = Math.floor(2 + 7 * Math.random());
-    for (let i = 0; i < 9; i++) {
-      values[i] = (targetNum - values.reduce((a, b) => a + b, 0))
-      if (i <= k && values[i] > 0) {
-        if (i < k && values[i] > 2) {
-          values[i] = Math.max(1, Math.ceil(0.6 * Math.random() * values[i]))
-        }
-      } else {
-        values[i] = Math.max(1, Math.ceil(Math.random() * targetNum))
-      }
-    }
-
     this.setState({
       targetNum,
-      values: this.arrayShuffle(values),
+      values: arrayShuffle(generateValues(targetNum)),
       sum: 0,
       isWin: false,
       isLose: false,
       gameOver: false
     })
   }
-
-  arrayShuffle (arr) {
-    let counter = arr.length;
-    while (counter > 0) {
-      let index = Math.floor(Math.random() * counter);
-      counter--;
-      let temp = arr[counter];
-      arr[counter] = arr[index];
-      arr[index] = temp;
-    }
-    return arr;
-  }
-
 
   componentWillMount () {
     this.generateNewGame()
@@ -141,6 +117,7 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
+          {this.renderMuteButton()}
         </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
@@ -186,7 +163,18 @@ export default class PlayLayout extends Component {
         onPress={this.props.navigator.pop}
         underlayColor={'gold'}
         style={styles.topBarBackButton}>
-        <Text style={styles.topBarBackButtonText}>&larr;</Text>
+        <Text style={styles.topBarIcon}>&larr;</Text>
+      </TouchableHighlight>
+    )
+  }
+
+  renderMuteButton () {
+    return (
+      <TouchableHighlight
+        onPress={() => {}}
+        underlayColor={'gold'}
+        style={styles.topBarMuteButton}>
+        <Text style={styles.topBarIcon}> &#x266B; </Text>
       </TouchableHighlight>
     )
   }
@@ -252,8 +240,16 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 12
   },
-  topBarBackButtonText: {
-    fontSize: 30
+  topBarMuteButton: {
+    borderRadius: 15,
+    marginRight: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 12
+  },
+  topBarIcon: {
+    fontSize: 30,
+    textDecorationLine: 'line-through'
   },
   bottomBar: {
     height: 60,
