@@ -16,18 +16,22 @@ import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
 import ToggleButton from './ToggleButton'
-import arrayShuffle from '../functions/arrayShuffle.js'
-import generateValues from '../functions/generateValues.js'
+import Game from '../classes/Game.js'
+
+const WIN_SCREEN_DELAY = 1500
+const LOSE_SCREEN_DELAY = 1500
 
 export default class PlayLayout extends Component {
   static get defaultProps () {
     return {
+      sound: true,
       targetNum: 9
     }
   }
 
   static get propTypes () {
     return {
+      sound: React.PropTypes.bool,
       targetNum: React.PropTypes.number
     }
   }
@@ -35,43 +39,37 @@ export default class PlayLayout extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      targetNum: props.targetNum,
-      values: new Array(9).fill(0),
-      sum: 0,
-      isWin: false,
-      isLose: false,
-      gameOver: false
-    }
+    this.game = new Game(props.targetNum)
+    this.game.generateNext()
+    this.state = {...{sound: this.props.sound}, ...this.game.getState()}
   }
 
   incSum (value) {
-    this.state.sum += Number(value)
-    this.checkGameState()
+    this.game.incSum(Number(value))
+    this.updateGameState()
   }
 
   decSum (value) {
-    this.state.sum -= Number(value)
-    this.checkGameState()
+    this.game.decSum(Number(value))
+    this.updateGameState()
   }
 
-  checkGameState () {
+  updateGameState () {
     if (this.state.gameOver) {
       return
     }
 
-    if (this.state.sum === this.state.targetNum) {
-      this.setState({
-        isWin: true,
-        gameOver: true
-      })
-      this.setTimeout(this.generateNewGame, 1500)
-    } else if (this.state.sum > this.state.targetNum) {
-      this.setState({
-        isLose: true,
-        gameOver: true
-      })
-      this.setTimeout(this.props.navigator.pop, 1500)
+    this.setState({
+      isWin: this.game.isWin,
+      gameOver: this.game.gameOver
+    })
+
+    if (this.game.gameOver) {
+      if (this.game.isWin) {
+        this.setTimeout(this.generateNewGame, WIN_SCREEN_DELAY)
+      } else {
+        this.setTimeout(this.props.navigator.pop, LOSE_SCREEN_DELAY)
+      }
     }
   }
 
@@ -89,28 +87,18 @@ export default class PlayLayout extends Component {
       }
     })
 
-    const targetNum = (this.state.targetNum + 1);
-
-    this.setState({
-      targetNum,
-      values: arrayShuffle(generateValues(targetNum)),
-      sum: 0,
-      isWin: false,
-      isLose: false,
-      gameOver: false
-    })
-  }
-
-  componentWillMount () {
-    this.generateNewGame()
+    this.game.generateNext()
+    this.setState(this.game.getState())
   }
 
   render () {
     let targetNumberTextStyle = styles.targetNumberText
-    if (this.state.isWin) {
-      targetNumberTextStyle = styles.targetNumberWinText
-    } else if (this.state.isLose) {
-      targetNumberTextStyle = styles.targetNumberLoseText
+    if (this.state.gameOver) {
+      if (this.state.isWin) {
+        targetNumberTextStyle = styles.targetNumberWinText
+      } else {
+        targetNumberTextStyle = styles.targetNumberLoseText
+      }
     }
 
     return (
@@ -169,12 +157,13 @@ export default class PlayLayout extends Component {
   }
 
   renderMuteButton () {
+    const style = (this.state.sound ? styles.topBarIcon : styles.topBarIconLineThrough)
     return (
       <TouchableHighlight
-        onPress={() => {}}
+        onPress={() => {this.setState({sound: !this.state.sound})}}
         underlayColor={'gold'}
         style={styles.topBarMuteButton}>
-        <Text style={styles.topBarIcon}> &#x266B; </Text>
+        <Text style={style}> &#x266B; </Text>
       </TouchableHighlight>
     )
   }
@@ -234,21 +223,27 @@ const styles = StyleSheet.create({
     paddingTop: 10
   },
   topBarBackButton: {
-    borderRadius: 15,
     marginLeft: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 12
+    paddingBottom: 12,
+    borderRadius: 15
   },
   topBarMuteButton: {
-    borderRadius: 15,
     marginRight: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 12
+    paddingBottom: 12,
+    borderRadius: 15
   },
   topBarIcon: {
     fontSize: 30,
+    fontWeight: 'bold'
+  },
+  topBarIconLineThrough: {
+    color: 'red',
+    fontSize: 30,
+    fontWeight: 'bold',
     textDecorationLine: 'line-through'
   },
   bottomBar: {
