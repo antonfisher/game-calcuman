@@ -94,7 +94,7 @@ export default class ToggleButton extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightskyblue',
+    backgroundColor: '#a5d9e5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 7,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   containerPressed: {
     flex: 1,
-    backgroundColor: 'orange',
+    backgroundColor: '#FFDA31',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

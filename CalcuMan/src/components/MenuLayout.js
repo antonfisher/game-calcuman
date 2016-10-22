@@ -33,7 +33,7 @@ export default class MenuLayout extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'azure'
+    backgroundColor: '#FFDA31'
   },
   logo: {
     flex: 1,

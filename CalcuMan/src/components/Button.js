@@ -89,7 +89,7 @@ reactMixin.onClass(Button, TimerMixin)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightskyblue',
+    backgroundColor: '#6BC0D5',
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'orange',
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
   },
   containerPressed: {
     flex: 1,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '#6BC0D5',
+    borderColor: '#6BC0D5',
     height: 1,
     width: 1
   },
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 60,
-    color: 'darkslategray'
+    color: 'white',
+    fontWeight: 'bold'
   },
   textPressed: {
     fontSize: 1,
