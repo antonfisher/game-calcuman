@@ -10,6 +10,11 @@ import {StyleSheet, View, Text} from 'react-native'
 import Button from './Button'
 
 export default class MenuLayout extends Component {
+  onPlayClick() {
+    this.props.soundsManager.play('toggle_off')
+    this.props.navigator.push({index: 1})
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -17,13 +22,7 @@ export default class MenuLayout extends Component {
           <Text>LOGO</Text>
         </View>
         <View style={styles.menuContainer}>
-          <Button
-            value={'PLAY'}
-            onPress={() => this.props.navigator.push({
-              index: 1
-            })}
-            disabled={false}
-          />
+          <Button value={'PLAY'} onPress={this.onPlayClick.bind(this)} disabled={false} />
         </View>
       </View>
     )

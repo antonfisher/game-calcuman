@@ -24,14 +24,14 @@ const LOSE_SCREEN_DELAY = 1500
 export default class PlayLayout extends Component {
   static get defaultProps () {
     return {
-      sound: true,
+      muted: false,
       targetNum: 9
     }
   }
 
   static get propTypes () {
     return {
-      sound: React.PropTypes.bool,
+      muted: React.PropTypes.bool,
       targetNum: React.PropTypes.number
     }
   }
@@ -41,15 +41,24 @@ export default class PlayLayout extends Component {
 
     this.game = new Game(props.targetNum)
     this.game.generateNext()
-    this.state = {...{sound: this.props.sound}, ...this.game.getState()}
+    this.state = {...{muted: this.props.soundsManager.muted}, ...this.game.getState()}
+  }
+
+  onMuteClick () {
+    const muted = !this.state.muted
+
+    this.setState({muted})
+    this.props.soundsManager.muted = muted
   }
 
   incSum (value) {
+    this.props.soundsManager.play('toggle_on')
     this.game.incSum(Number(value))
     this.updateGameState()
   }
 
   decSum (value) {
+    this.props.soundsManager.play('toggle_off')
     this.game.decSum(Number(value))
     this.updateGameState()
   }
@@ -157,10 +166,10 @@ export default class PlayLayout extends Component {
   }
 
   renderMuteButton () {
-    const style = (this.state.sound ? styles.topBarIcon : styles.topBarIconLineThrough)
+    const style = (this.state.muted ? styles.topBarIconLineThrough : styles.topBarIcon)
     return (
       <TouchableHighlight
-        onPress={() => {this.setState({sound: !this.state.sound})}}
+        onPress={this.onMuteClick.bind(this)}
         underlayColor={'gold'}
         style={styles.topBarMuteButton}>
         <Text style={style}> &#x266B; </Text>
