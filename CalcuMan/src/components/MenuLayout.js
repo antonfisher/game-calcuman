@@ -8,9 +8,10 @@ import React, {Component} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
 import Button from './Button'
+import MuteButton from './MuteButton'
 
 export default class MenuLayout extends Component {
-  onPlayClick() {
+  onPlayClick () {
     this.props.soundsManager.play('toggle_off')
     this.props.navigator.push({index: 1})
   }
@@ -22,7 +23,19 @@ export default class MenuLayout extends Component {
           <Text>LOGO</Text>
         </View>
         <View style={styles.menuContainer}>
-          <Button value={'PLAY'} onPress={this.onPlayClick.bind(this)} disabled={false} />
+          <View style={styles.menuItem}>
+            <Button
+              value={'PLAY'}
+              onPress={this.onPlayClick.bind(this)}
+              disabled={false}
+            />
+          </View>
+          <View style={styles.menuItem}>
+            <MuteButton
+              soundsManager={this.props.soundsManager}
+              muted={this.props.muted}
+            />
+          </View>
         </View>
       </View>
     )
@@ -32,7 +45,7 @@ export default class MenuLayout extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFDA31'
+    backgroundColor: '#ffeb96'
   },
   logo: {
     flex: 1,
@@ -43,8 +56,12 @@ const styles = StyleSheet.create({
   menuContainer: {
     flex: 2,
     margin: 20,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  menuItem: {
+    marginBottom: 20,
     flexDirection: 'row'
   }
 })

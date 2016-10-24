@@ -16,49 +16,29 @@ import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
 import ToggleButton from './ToggleButton'
+import MuteButton from './MuteButton'
 import Game from '../classes/Game.js'
 
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500
 
 export default class PlayLayout extends Component {
-  static get defaultProps () {
-    return {
-      muted: false,
-      targetNum: 9
-    }
-  }
-
-  static get propTypes () {
-    return {
-      muted: React.PropTypes.bool,
-      targetNum: React.PropTypes.number
-    }
-  }
-
   constructor (props) {
     super(props)
 
-    this.game = new Game(props.targetNum)
+    this.game = new Game(9)
     this.game.generateNext()
-    this.state = {...{muted: this.props.soundsManager.muted}, ...this.game.getState()}
-  }
-
-  onMuteClick () {
-    const muted = !this.state.muted
-
-    this.setState({muted})
-    this.props.soundsManager.muted = muted
+    this.state = this.game.getState()
   }
 
   incSum (value) {
-    this.props.soundsManager.play('toggle_on')
+    this.props.soundsManager.play('toggle_off')
     this.game.incSum(Number(value))
     this.updateGameState()
   }
 
   decSum (value) {
-    this.props.soundsManager.play('toggle_off')
+    this.props.soundsManager.play('toggle_on')
     this.game.decSum(Number(value))
     this.updateGameState()
   }
@@ -114,7 +94,10 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
-          {this.renderMuteButton()}
+          <MuteButton
+            soundsManager={this.props.soundsManager}
+            muted={this.props.muted}
+          />
         </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
@@ -161,18 +144,6 @@ export default class PlayLayout extends Component {
         underlayColor={'gold'}
         style={styles.topBarBackButton}>
         <Text style={styles.topBarIcon}>&larr;</Text>
-      </TouchableHighlight>
-    )
-  }
-
-  renderMuteButton () {
-    const style = (this.state.muted ? styles.topBarIconLineThrough : styles.topBarIcon)
-    return (
-      <TouchableHighlight
-        onPress={this.onMuteClick.bind(this)}
-        underlayColor={'gold'}
-        style={styles.topBarMuteButton}>
-        <Text style={style}> &#x266B; </Text>
       </TouchableHighlight>
     )
   }
@@ -238,22 +209,9 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     borderRadius: 15
   },
-  topBarMuteButton: {
-    marginRight: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 12,
-    borderRadius: 15
-  },
   topBarIcon: {
     fontSize: 30,
     fontWeight: 'bold'
-  },
-  topBarIconLineThrough: {
-    color: 'red',
-    fontSize: 30,
-    fontWeight: 'bold',
-    textDecorationLine: 'line-through'
   },
   bottomBar: {
     height: 60,

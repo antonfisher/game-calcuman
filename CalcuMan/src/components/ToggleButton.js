@@ -82,7 +82,8 @@ export default class ToggleButton extends Component {
         style={styleContainer}
         onPress={this._onPressButton}
         disabled={this.props.disabled}
-        underlayColor={'gold'}>
+        underlayColor={'gold'}
+      >
         <Text style={styleText} allowFontScaling>
           {this.props.value}
         </Text>

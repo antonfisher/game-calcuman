@@ -74,8 +74,9 @@ export default class Button extends Component {
       <TouchableHighlight
         style={styleContainer}
         onPress={this._onPressButton}
-        underlayColor={'gold'}
-        disabled={this.props.disabled}>
+        underlayColor={'orange'}
+        disabled={this.props.disabled}
+      >
         <Text style={styleText} allowFontScaling>
           {this.props.value}
         </Text>
@@ -100,10 +101,16 @@ const styles = StyleSheet.create({
   },
   containerPressed: {
     flex: 1,
-    backgroundColor: '#6BC0D5',
-    borderColor: '#6BC0D5',
-    height: 1,
-    width: 1
+    backgroundColor: 'orange',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'orange',
+    borderRadius: 13,
+    borderWidth: 9,
+    padding: 5,
+    margin: 15,
+    height: 20,
+    width: 20
   },
   containerDisabled: {
     flex: 1,

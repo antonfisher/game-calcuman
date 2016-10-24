@@ -7,9 +7,10 @@
 import {default as Sound} from 'react-native-sound'
 
 export default class SoundsManager {
-  constructor () {
+  constructor (onChangeCallback) {
     this.muted = false
     this.sounds = {}
+    this.onChangeCallback = onChangeCallback
 
     this.loadSound('toggle_on')
     this.loadSound('toggle_off')
@@ -24,5 +25,10 @@ export default class SoundsManager {
     if (!this.muted) {
       this.sounds[key].play()
     }
+  }
+
+  setMuted (muted) {
+    this.muted = muted
+    this.onChangeCallback(muted)
   }
 }
