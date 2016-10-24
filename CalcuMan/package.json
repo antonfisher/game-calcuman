@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "emulator": "emulator -list-avds && emulator @Nexus_5",
     "lint": "./node_modules/.bin/standard | ./node_modules/.bin/snazzy",
     "lint:fix": "./node_modules/.bin/standard --fix",
     "flow": "./node_modules/.bin/flow check",

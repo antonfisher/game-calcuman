@@ -17,7 +17,7 @@ export default class SoundsManager {
   }
 
   loadSound (key) {
-    this.sounds[key] = new Sound(key + '.mp3', Sound.MAIN_BUNDLE)
+    this.sounds[key] = new Sound(`${key}.mp3`, Sound.MAIN_BUNDLE)
   }
 
   play (key) {
