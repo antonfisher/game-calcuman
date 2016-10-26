@@ -26,7 +26,11 @@ export default class PlayLayout extends Component {
   constructor (props) {
     super(props)
 
-    this.game = new Game(9)
+    this.game = new Game({
+      targetNum: 9,
+      onTimeOverCallback: this.updateGameState.bind(this),
+      onTickCallback: this.onTimerTick.bind(this)
+    })
     this.game.generateNext()
     this.state = this.game.getState()
   }
@@ -80,6 +84,10 @@ export default class PlayLayout extends Component {
     this.setState(this.game.getState())
   }
 
+  onTimerTick (timeout) {
+    this.setState({timeout})
+  }
+
   render () {
     let targetNumberTextStyle = styles.targetNumberText
     if (this.state.gameOver) {
@@ -94,6 +102,7 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
+          {this.renderTimer()}
           <MuteButton
             soundsManager={this.props.soundsManager}
             muted={this.props.muted}
@@ -145,6 +154,29 @@ export default class PlayLayout extends Component {
         style={styles.topBarBackButton}>
         <Text style={styles.topBarIcon}>&larr;</Text>
       </TouchableHighlight>
+    )
+  }
+
+  renderTimer () {
+    const timerTextStyle = (
+      this.state.timeout > 10 ? styles.timerText : styles.timerRedText
+    )
+
+    return (this.state.timeout
+      ? (
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerIcon}>&#x25F7;</Text>
+          <Text style={timerTextStyle}>
+            &nbsp;
+            {this.state.timeout}
+          </Text>
+        </View>
+      )
+      : (
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerRedText}>Time over &#x2639;</Text>
+        </View>
+      )
     )
   }
 }
@@ -212,6 +244,25 @@ const styles = StyleSheet.create({
   topBarIcon: {
     fontSize: 30,
     fontWeight: 'bold'
+  },
+  timerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  timerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  timerRedText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red'
+  },
+  timerIcon: {
+    fontSize: 40,
+    fontWeight: 'normal',
+    marginTop: -6
   },
   bottomBar: {
     height: 60,

@@ -7,8 +7,22 @@
 import arrayShuffle from '../functions/arrayShuffle.js'
 
 export default class Game {
-  constructor (targetNum) {
+  constructor ({targetNum, onTimeOverCallback, onTickCallback}) {
     this.targetNum = (targetNum || 0)
+    this.onTimeOverCallback = onTimeOverCallback
+    this.onTickCallback = onTickCallback
+    this.initTimeout = 50
+    this.timeout = this.initTimeout
+    this.interval = setInterval(() => {
+      this.timeout--
+      this.onTickCallback(this.timeout)
+      if (this.timeout <= 0) {
+        clearInterval(this.interval)
+        this.isWin = false
+        this.gameOver = true
+        this.onTimeOverCallback()
+      }
+    }, 1000)
   }
 
   generateNext () {
@@ -16,6 +30,7 @@ export default class Game {
     this.isWin = false
     this.gameOver = false
     this.targetNum += 1
+    this.timeout += 10
     this.values = arrayShuffle(this.generateValues(this.targetNum))
   }
 
@@ -44,7 +59,8 @@ export default class Game {
       isWin: this.isWin,
       gameOver: this.gameOver,
       values: this.values,
-      targetNum: this.targetNum
+      targetNum: this.targetNum,
+      timeout: this.timeout
     }
   }
 
