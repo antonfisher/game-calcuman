@@ -33,16 +33,14 @@ export default class CalcuManLayout extends Component {
               <MenuLayout
                 navigator={navigator}
                 soundsManager={this.soundsManager}
-                muted={this.state.muted}
-              />
+                muted={this.state.muted} />
             )
           } else {
             return (
               <PlayLayout
                 navigator={navigator}
                 soundsManager={this.soundsManager}
-                muted={this.state.muted}
-              />
+                muted={this.state.muted} />
             )
           }
         }}

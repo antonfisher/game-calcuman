@@ -27,14 +27,12 @@ export default class MenuLayout extends Component {
             <Button
               value={'PLAY'}
               onPress={this.onPlayClick.bind(this)}
-              disabled={false}
-            />
+              disabled={false} />
           </View>
           <View style={styles.menuItem}>
             <MuteButton
               soundsManager={this.props.soundsManager}
-              muted={this.props.muted}
-            />
+              muted={this.props.muted} />
           </View>
         </View>
       </View>

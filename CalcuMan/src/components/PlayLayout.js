@@ -103,11 +103,10 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
-          <Timer timeout={this.state.timeout}/>
+          <Timer timeout={this.state.timeout} />
           <MuteButton
             soundsManager={this.props.soundsManager}
-            muted={this.props.muted}
-          />
+            muted={this.props.muted} />
         </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
@@ -148,8 +147,7 @@ export default class PlayLayout extends Component {
         value={this.state.values[valuesIndex].toString()}
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
-        disabled={this.state.gameOver}
-      />
+        disabled={this.state.gameOver} />
     )
   }
 

@@ -14,7 +14,7 @@ export default class Game {
     this.timeout = 0
   }
 
-  startTimer() {
+  startTimer () {
     this.interval = setInterval(() => {
       this.timeout--
       this.onTickCallback(this.timeout)
@@ -27,7 +27,7 @@ export default class Game {
     }, 1000)
   }
 
-  stopTimer() {
+  stopTimer () {
     clearInterval(this.interval)
   }
 
@@ -51,7 +51,7 @@ export default class Game {
     this.updateState()
   }
 
-  updateState() {
+  updateState () {
     if (this.sum === this.targetNum) {
       this.isWin = true
       this.gameOver = true
@@ -63,7 +63,7 @@ export default class Game {
     }
   }
 
-  getState() {
+  getState () {
     return {
       isWin: this.isWin,
       gameOver: this.gameOver,
@@ -74,8 +74,8 @@ export default class Game {
   }
 
   generateValues (targetNum) {
-    const values = new Array(9).fill(0);
-    const k = Math.floor(2 + 7 * Math.random());
+    const values = new Array(9).fill(0)
+    const k = Math.floor(2 + 7 * Math.random())
 
     for (let i = 0; i < 9; i++) {
       values[i] = (targetNum - values.reduce((a, b) => a + b, 0))
@@ -88,6 +88,6 @@ export default class Game {
       }
     }
 
-    return values;
+    return values
   }
 }

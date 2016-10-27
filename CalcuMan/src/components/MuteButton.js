@@ -23,8 +23,7 @@ export default class MuteButton extends Component {
       <TouchableHighlight
         onPress={this._onPressButton.bind(this)}
         underlayColor={'gold'}
-        style={styles.topBarMuteButton}
-      >
+        style={styles.topBarMuteButton}>
         <Text style={style}> &#x266B; </Text>
       </TouchableHighlight>
     )

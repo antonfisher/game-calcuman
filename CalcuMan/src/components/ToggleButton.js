@@ -5,13 +5,7 @@
  */
 
 import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  LayoutAnimation
-} from 'react-native'
+import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-native'
 
 export default class ToggleButton extends Component {
   static get defaultProps () {
@@ -82,8 +76,7 @@ export default class ToggleButton extends Component {
         style={styleContainer}
         onPress={this._onPressButton}
         disabled={this.props.disabled}
-        underlayColor={'gold'}
-      >
+        underlayColor={'gold'}>
         <Text style={styleText} allowFontScaling>
           {this.props.value}
         </Text>

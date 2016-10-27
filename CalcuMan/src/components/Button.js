@@ -5,13 +5,7 @@
  */
 
 import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  LayoutAnimation,
-  TouchableHighlight
-} from 'react-native'
+import {StyleSheet, Text, LayoutAnimation, TouchableHighlight} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
@@ -36,8 +30,6 @@ export default class Button extends Component {
     this.state = {
       pressed: false
     }
-
-    this._onPressButton = this._onPressButton.bind(this)
   }
 
   _onPressButton () {
@@ -54,7 +46,7 @@ export default class Button extends Component {
       pressed: true
     })
 
-    this.setTimeout(() => this.state.pressed = false, 100)
+    this.setTimeout(() => { this.state.pressed = false }, 100)
 
     this.props.onPress()
   }
@@ -73,10 +65,9 @@ export default class Button extends Component {
     return (
       <TouchableHighlight
         style={styleContainer}
-        onPress={this._onPressButton}
+        onPress={this._onPressButton.bind(this)}
         underlayColor={'orange'}
-        disabled={this.props.disabled}
-      >
+        disabled={this.props.disabled}>
         <Text style={styleText} allowFontScaling>
           {this.props.value}
         </Text>
