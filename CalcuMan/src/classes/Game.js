@@ -11,8 +11,10 @@ export default class Game {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
-    this.initTimeout = 50
-    this.timeout = this.initTimeout
+    this.timeout = 0
+  }
+
+  startTimer() {
     this.interval = setInterval(() => {
       this.timeout--
       this.onTickCallback(this.timeout)
@@ -25,6 +27,10 @@ export default class Game {
     }, 1000)
   }
 
+  stopTimer() {
+    clearInterval(this.interval)
+  }
+
   generateNext () {
     this.sum = 0
     this.isWin = false
@@ -32,6 +38,7 @@ export default class Game {
     this.targetNum += 1
     this.timeout += 10
     this.values = arrayShuffle(this.generateValues(this.targetNum))
+    this.startTimer()
   }
 
   incSum (value) {
@@ -48,9 +55,11 @@ export default class Game {
     if (this.sum === this.targetNum) {
       this.isWin = true
       this.gameOver = true
+      this.stopTimer()
     } else if (this.sum > this.targetNum) {
       this.isWin = false
       this.gameOver = true
+      this.stopTimer()
     }
   }
 

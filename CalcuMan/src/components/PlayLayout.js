@@ -17,6 +17,7 @@ import TimerMixin from 'react-timer-mixin'
 
 import ToggleButton from './ToggleButton'
 import MuteButton from './MuteButton'
+import Timer from './Timer'
 import Game from '../classes/Game.js'
 
 const WIN_SCREEN_DELAY = 1500
@@ -102,7 +103,7 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
-          {this.renderTimer()}
+          <Timer timeout={this.state.timeout}/>
           <MuteButton
             soundsManager={this.props.soundsManager}
             muted={this.props.muted}
@@ -113,14 +114,20 @@ export default class PlayLayout extends Component {
             {this.state.targetNum}
           </Text>
         </View>
-        <View style={styles.gridContainer}>
-          {this.renderGridRow(0)}
-          {this.renderGridRow(1)}
-          {this.renderGridRow(2)}
-        </View>
+        {this.state.gameOver ? null : this.renderGridContainer()}
         <View style={styles.bottomBar}>
           <Text>AD</Text>
         </View>
+      </View>
+    )
+  }
+
+  renderGridContainer () {
+    return (
+      <View style={styles.gridContainer}>
+        {this.renderGridRow(0)}
+        {this.renderGridRow(1)}
+        {this.renderGridRow(2)}
       </View>
     )
   }
@@ -156,29 +163,6 @@ export default class PlayLayout extends Component {
       </TouchableHighlight>
     )
   }
-
-  renderTimer () {
-    const timerTextStyle = (
-      this.state.timeout > 10 ? styles.timerText : styles.timerRedText
-    )
-
-    return (this.state.timeout
-      ? (
-        <View style={styles.timerContainer}>
-          <Text style={styles.timerIcon}>&#x25F7;</Text>
-          <Text style={timerTextStyle}>
-            &nbsp;
-            {this.state.timeout}
-          </Text>
-        </View>
-      )
-      : (
-        <View style={styles.timerContainer}>
-          <Text style={styles.timerRedText}>Time over &#x2639;</Text>
-        </View>
-      )
-    )
-  }
 }
 
 reactMixin.onClass(PlayLayout, TimerMixin)
@@ -196,7 +180,7 @@ const styles = StyleSheet.create({
   targetNumberText: {
     fontSize: 120,
     margin: 20,
-    marginTop: 0,
+    marginTop: 15,
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 5,
     textShadowColor: '#aaaaaa'
@@ -244,25 +228,6 @@ const styles = StyleSheet.create({
   topBarIcon: {
     fontSize: 30,
     fontWeight: 'bold'
-  },
-  timerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  timerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  timerRedText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red'
-  },
-  timerIcon: {
-    fontSize: 40,
-    fontWeight: 'normal',
-    marginTop: -6
   },
   bottomBar: {
     height: 60,
