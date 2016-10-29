@@ -5,13 +5,7 @@
  */
 
 import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  LayoutAnimation,
-  TouchableHighlight
-} from 'react-native'
+import {StyleSheet, Text, View, LayoutAnimation, TouchableHighlight} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
@@ -22,6 +16,7 @@ import Game from '../classes/Game.js'
 
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500
+const WARNING_THRESHOLD = 5
 
 export default class PlayLayout extends Component {
   constructor (props) {
@@ -87,6 +82,9 @@ export default class PlayLayout extends Component {
 
   onTimerTick (timeout) {
     this.setState({timeout})
+    if (this.state.timeout <= WARNING_THRESHOLD) {
+      this.props.soundsManager.play('timeout')
+    }
   }
 
   render () {
@@ -103,7 +101,7 @@ export default class PlayLayout extends Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           {this.renderBackButton()}
-          <Timer timeout={this.state.timeout} />
+          <Timer timeout={this.state.timeout} warningThreshold={WARNING_THRESHOLD} />
           <MuteButton
             soundsManager={this.props.soundsManager}
             muted={this.props.muted} />

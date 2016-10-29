@@ -11,7 +11,7 @@ export default class Game {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
-    this.timeout = 0
+    this.timeout = 10
   }
 
   startTimer () {
@@ -36,7 +36,7 @@ export default class Game {
     this.isWin = false
     this.gameOver = false
     this.targetNum += 1
-    this.timeout += 10
+    this.timeout += 5
     this.values = arrayShuffle(this.generateValues(this.targetNum))
     this.startTimer()
   }
