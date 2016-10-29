@@ -8,6 +8,7 @@ import React, {Component} from 'react'
 import {StyleSheet, Text, View, LayoutAnimation, TouchableHighlight} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import ToggleButton from './ToggleButton'
 import MuteButton from './MuteButton'
@@ -155,7 +156,7 @@ export default class PlayLayout extends Component {
         onPress={this.props.navigator.pop}
         underlayColor={'gold'}
         style={styles.topBarBackButton}>
-        <Text style={styles.topBarIcon}>&larr;</Text>
+        <Icon name={'arrow-back'} size={30} color={'gray'} />
       </TouchableHighlight>
     )
   }
@@ -220,10 +221,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 12,
     borderRadius: 15
-  },
-  topBarIcon: {
-    fontSize: 30,
-    fontWeight: 'bold'
   },
   bottomBar: {
     height: 60,

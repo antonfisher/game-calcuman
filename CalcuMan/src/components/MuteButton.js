@@ -5,11 +5,8 @@
  */
 
 import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight
-} from 'react-native'
+import {StyleSheet, Text, TouchableHighlight} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class MuteButton extends Component {
   _onPressButton () {
@@ -17,14 +14,15 @@ export default class MuteButton extends Component {
   }
 
   render () {
-    const style = (this.props.muted ? styles.topBarIconLineThrough : styles.topBarIcon)
+    const name = (this.props.muted ? 'volume-off' : 'volume-up')
+    const color = (this.props.muted ? 'red' : 'gray')
 
     return (
       <TouchableHighlight
         onPress={this._onPressButton.bind(this)}
         underlayColor={'gold'}
         style={styles.topBarMuteButton}>
-        <Text style={style}> &#x266B; </Text>
+        <Icon name={name} size={30} color={color} />
       </TouchableHighlight>
     )
   }
@@ -33,19 +31,9 @@ export default class MuteButton extends Component {
 const styles = StyleSheet.create({
   topBarMuteButton: {
     marginRight: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 12,
+    paddingLeft: 21,
+    paddingRight: 20,
+    paddingBottom: 2,
     borderRadius: 15
-  },
-  topBarIcon: {
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-  topBarIconLineThrough: {
-    color: 'red',
-    fontSize: 30,
-    fontWeight: 'bold',
-    textDecorationLine: 'line-through'
   }
 })

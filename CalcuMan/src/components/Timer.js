@@ -6,6 +6,7 @@
 
 import React, {Component} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class Timer extends Component {
   static get defaultProps () {
@@ -34,7 +35,7 @@ export default class Timer extends Component {
     if (this.props.timeout) {
       return (
         <View style={styles.container}>
-          <Text style={iconStyle}>&#x25F7;</Text>
+          <Icon name={'timer'} size={30} color={'gray'} />
           <Text style={textStyle}>&nbsp;{this.props.timeout}</Text>
         </View>
       )
@@ -42,7 +43,7 @@ export default class Timer extends Component {
       return (
         <View style={styles.container}>
           <Text style={textStyle}>Time over&nbsp;</Text>
-          <Text style={iconStyle}>&#x2639;</Text>
+          <Icon name={'mood-bad'} size={30} color={'gray'} />
         </View>
       )
     }
