@@ -1,23 +1,21 @@
-'use strict'
-
 /**
  * @flow
  */
 
 import React, {Component} from 'react'
 import {AppRegistry, UIManager} from 'react-native'
-import CalcuManLayout from './src/components/CalcuManLayout'
+import AppLayout from './src/app/AppLayout'
 
 if (UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
-class CalcuMan extends Component {
+class App extends Component {
   render () {
     return (
-      <CalcuManLayout />
+      <AppLayout />
     )
   }
 }
 
-AppRegistry.registerComponent('CalcuMan', () => CalcuMan)
+AppRegistry.registerComponent('CalcuMan', () => App)

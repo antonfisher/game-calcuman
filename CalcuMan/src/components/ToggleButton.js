@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * @flow
  */
@@ -28,11 +26,9 @@ export default class ToggleButton extends Component {
     this.state = {
       pressed: false
     }
-
-    this._onPressButton = this._onPressButton.bind(this)
   }
 
-  _onPressButton () {
+  onPressButton () {
     LayoutAnimation.configureNext({
       duration: 200,
       update: {
@@ -74,7 +70,7 @@ export default class ToggleButton extends Component {
     return (
       <TouchableHighlight
         style={styleContainer}
-        onPress={this._onPressButton}
+        onPress={this.onPressButton.bind(this)}
         disabled={this.props.disabled}
         underlayColor={'gold'}>
         <Text style={styleText} allowFontScaling>

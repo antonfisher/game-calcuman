@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import IconButton from './IconButton'
+import IconButton from '../../components/IconButton'
 
 export default class MuteButton extends Component {
   static get defaultProps () {

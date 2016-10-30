@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * @flow
  */
@@ -7,12 +5,12 @@
 import React, {Component} from 'react'
 import {Navigator} from 'react-native'
 
-import MenuLayout from './MenuLayout'
-import PlayLayout from './PlayLayout'
+import MenuLayout from './layouts/MenuLayout'
+import PlayLayout from './layouts/PlayLayout'
 
 import SoundsManager from '../classes/SoundsManager'
 
-export default class CalcuManLayout extends Component {
+export default class AppLayout extends Component {
   constructor (props) {
     super(props)
 
@@ -43,8 +41,7 @@ export default class CalcuManLayout extends Component {
                 muted={this.state.muted} />
             )
           }
-        }}
-      />
+        }}/>
     )
   }
 }

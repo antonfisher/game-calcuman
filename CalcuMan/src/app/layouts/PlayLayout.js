@@ -7,11 +7,11 @@ import {StyleSheet, Text, View, LayoutAnimation, TouchableHighlight} from 'react
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
-import ToggleButton from './ToggleButton'
-import MuteButton from './MuteButton'
-import IconButton from './IconButton'
-import Timer from './Timer'
-import Game from '../classes/Game.js'
+import ToggleButton from '../../components/ToggleButton'
+import MuteButton from '../buttons/MuteButton'
+import IconButton from '../../components/IconButton'
+import Game from '../../classes/Game'
+import Timer from '../Timer'
 
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500

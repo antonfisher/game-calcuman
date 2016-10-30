@@ -5,8 +5,8 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
-import Button from './Button'
-import MuteButton from './MuteButton'
+import Button from '../../components/Button'
+import MuteButton from '../buttons/MuteButton'
 
 export default class MenuLayout extends Component {
   onPlayClick () {
