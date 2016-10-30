@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * @flow
  */
@@ -7,6 +5,10 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+
+const COLOR_DEFAULT = 'gray'
+const COLOR_WARNING = 'red'
+const ICON_SIZE = 30
 
 export default class Timer extends Component {
   static get defaultProps () {
@@ -24,26 +26,25 @@ export default class Timer extends Component {
   }
 
   render () {
-    const textStyle = [styles.text]
-    const iconStyle = [styles.icon]
-
-    if (this.props.timeout <= this.props.warningThreshold) {
-      textStyle.push(styles.red)
-      iconStyle.push(styles.red)
-    }
-
     if (this.props.timeout) {
+      let color = COLOR_DEFAULT
+      let textStyle = [styles.text]
+      if (this.props.timeout <= this.props.warningThreshold) {
+        textStyle.push(styles.textWarning)
+        color = COLOR_WARNING
+      }
+
       return (
         <View style={styles.container}>
-          <Icon name={'timer'} size={30} color={'gray'} />
+          <Icon name={'timer'} size={ICON_SIZE} color={color}/>
           <Text style={textStyle}>&nbsp;{this.props.timeout}</Text>
         </View>
       )
     } else {
       return (
         <View style={styles.container}>
-          <Text style={textStyle}>Time over&nbsp;</Text>
-          <Icon name={'mood-bad'} size={30} color={'gray'} />
+          <Text style={[styles.text, styles.textWarning]}>Time over&nbsp;</Text>
+          <Icon name={'mood-bad'} size={ICON_SIZE} color={COLOR_WARNING}/>
         </View>
       )
     }
@@ -59,14 +60,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'gray'
+    color: COLOR_DEFAULT
   },
-  red: {
-    color: 'red'
-  },
-  icon: {
-    fontSize: 40,
-    fontWeight: 'normal',
-    marginTop: -6
+  textWarning: {
+    color: COLOR_WARNING
   }
 })

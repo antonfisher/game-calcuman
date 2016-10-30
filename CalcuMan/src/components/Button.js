@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * @flow
  */
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#6BC0D5',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'orange',
+    borderColor: 'gold',
     borderRadius: 13,
     borderWidth: 9,
     padding: 5,

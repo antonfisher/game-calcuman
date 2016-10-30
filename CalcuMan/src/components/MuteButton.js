@@ -1,15 +1,25 @@
-'use strict'
-
 /**
  * @flow
  */
 
 import React, {Component} from 'react'
-import {StyleSheet, Text, TouchableHighlight} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import IconButton from './IconButton'
 
 export default class MuteButton extends Component {
-  _onPressButton () {
+  static get defaultProps () {
+    return {
+      muted: false
+    }
+  }
+
+  static get propTypes () {
+    return {
+      muted: React.PropTypes.bool,
+      soundsManager: React.PropTypes.object
+    }
+  }
+
+  onClick () {
     this.props.soundsManager.setMuted(!this.props.muted)
   }
 
@@ -18,22 +28,7 @@ export default class MuteButton extends Component {
     const color = (this.props.muted ? 'red' : 'gray')
 
     return (
-      <TouchableHighlight
-        onPress={this._onPressButton.bind(this)}
-        underlayColor={'gold'}
-        style={styles.topBarMuteButton}>
-        <Icon name={name} size={30} color={color} />
-      </TouchableHighlight>
+      <IconButton name={name} color={color} onClick={this.onClick.bind(this)}/>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  topBarMuteButton: {
-    marginRight: 10,
-    paddingLeft: 21,
-    paddingRight: 20,
-    paddingBottom: 2,
-    borderRadius: 15
-  }
-})

@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * @flow
  */
@@ -8,10 +6,10 @@ import React, {Component} from 'react'
 import {StyleSheet, Text, View, LayoutAnimation, TouchableHighlight} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import ToggleButton from './ToggleButton'
 import MuteButton from './MuteButton'
+import IconButton from './IconButton'
 import Timer from './Timer'
 import Game from '../classes/Game.js'
 
@@ -101,11 +99,15 @@ export default class PlayLayout extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.topBar}>
-          {this.renderBackButton()}
-          <Timer timeout={this.state.timeout} warningThreshold={WARNING_THRESHOLD} />
+          <IconButton
+            name={'arrow-back'}
+            onClick={this.props.navigator.pop}/>
+          <Timer
+            timeout={this.state.timeout}
+            warningThreshold={WARNING_THRESHOLD}/>
           <MuteButton
             soundsManager={this.props.soundsManager}
-            muted={this.props.muted} />
+            muted={this.props.muted}/>
         </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
@@ -147,17 +149,6 @@ export default class PlayLayout extends Component {
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
         disabled={this.state.gameOver} />
-    )
-  }
-
-  renderBackButton () {
-    return (
-      <TouchableHighlight
-        onPress={this.props.navigator.pop}
-        underlayColor={'gold'}
-        style={styles.topBarBackButton}>
-        <Icon name={'arrow-back'} size={30} color={'gray'} />
-      </TouchableHighlight>
     )
   }
 }
@@ -213,14 +204,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingTop: 10
-  },
-  topBarBackButton: {
-    marginLeft: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 12,
-    borderRadius: 15
+    paddingTop: 10,
+    paddingLeft: 1,
+    paddingRight: 3
   },
   bottomBar: {
     height: 60,
