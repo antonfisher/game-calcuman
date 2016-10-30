@@ -9,6 +9,20 @@ import Button from '../../components/Button'
 import MuteButton from '../buttons/MuteButton'
 
 export default class MenuLayout extends Component {
+  static get defaultProps () {
+    return {
+      muted: false
+    }
+  }
+
+  static get propTypes () {
+    return {
+      muted: React.PropTypes.bool,
+      navigator: React.PropTypes.object,
+      soundsManager: React.PropTypes.object
+    }
+  }
+
   onPlayClick () {
     this.props.soundsManager.play('toggle_off')
     this.props.navigator.push({index: 1})

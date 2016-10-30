@@ -9,14 +9,18 @@ export default class ToggleButton extends Component {
   static get defaultProps () {
     return {
       value: '-',
-      disabled: true
+      disabled: true,
+      onUp: function () {},
+      onDown: function () {}
     }
   }
 
   static get propTypes () {
     return {
       value: React.PropTypes.string,
-      disabled: React.PropTypes.bool
+      disabled: React.PropTypes.bool,
+      onUp: React.PropTypes.func,
+      onDown: React.PropTypes.func
     }
   }
 

@@ -18,6 +18,20 @@ const LOSE_SCREEN_DELAY = 1500
 const WARNING_THRESHOLD = 5
 
 export default class PlayLayout extends Component {
+  static get defaultProps () {
+    return {
+      muted: false
+    }
+  }
+
+  static get propTypes () {
+    return {
+      muted: React.PropTypes.bool,
+      navigator: React.PropTypes.object,
+      soundsManager: React.PropTypes.object
+    }
+  }
+
   constructor (props) {
     super(props)
 

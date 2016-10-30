@@ -11,14 +11,16 @@ export default class Button extends Component {
   static get defaultProps () {
     return {
       value: '',
-      disabled: true
+      disabled: true,
+      onPress: function () {}
     }
   }
 
   static get propTypes () {
     return {
       value: React.PropTypes.string,
-      disabled: React.PropTypes.bool
+      disabled: React.PropTypes.bool,
+      onPress: React.PropTypes.func
     }
   }
 
