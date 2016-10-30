@@ -41,7 +41,7 @@ export default class AppLayout extends Component {
                 muted={this.state.muted} />
             )
           }
-        }}/>
+        }} />
     )
   }
 }

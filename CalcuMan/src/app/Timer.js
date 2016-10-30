@@ -36,7 +36,7 @@ export default class Timer extends Component {
 
       return (
         <View style={styles.container}>
-          <Icon name={'timer'} size={ICON_SIZE} color={color}/>
+          <Icon name={'timer'} size={ICON_SIZE} color={color} />
           <Text style={textStyle}>&nbsp;{this.props.timeout}</Text>
         </View>
       )
@@ -44,7 +44,7 @@ export default class Timer extends Component {
       return (
         <View style={styles.container}>
           <Text style={[styles.text, styles.textWarning]}>Time over&nbsp;</Text>
-          <Icon name={'mood-bad'} size={ICON_SIZE} color={COLOR_WARNING}/>
+          <Icon name={'mood-bad'} size={ICON_SIZE} color={COLOR_WARNING} />
         </View>
       )
     }

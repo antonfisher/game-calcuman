@@ -28,7 +28,7 @@ export default class MuteButton extends Component {
     const color = (this.props.muted ? 'red' : 'gray')
 
     return (
-      <IconButton name={name} color={color} onClick={this.onClick.bind(this)}/>
+      <IconButton name={name} color={color} onClick={this.onClick.bind(this)} />
     )
   }
 }

@@ -14,7 +14,7 @@ export default class IconButton extends Component {
       name: 'remove',
       color: 'gray',
       style: {},
-      onClick: (function () {})
+      onClick: function () {}
     }
   }
 
@@ -33,7 +33,7 @@ export default class IconButton extends Component {
         onPress={this.props.onClick}
         underlayColor={'gold'}
         style={[styles.button, this.props.style]}>
-        <Icon name={this.props.name} size={ICON_SIZE} color={this.props.color}/>
+        <Icon name={this.props.name} size={ICON_SIZE} color={this.props.color} />
       </TouchableHighlight>
     )
   }

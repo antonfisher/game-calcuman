@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, LayoutAnimation, TouchableHighlight} from 'react-native'
+import {StyleSheet, Text, View, LayoutAnimation} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
@@ -101,13 +101,13 @@ export default class PlayLayout extends Component {
         <View style={styles.topBar}>
           <IconButton
             name={'arrow-back'}
-            onClick={this.props.navigator.pop}/>
+            onClick={this.props.navigator.pop} />
           <Timer
             timeout={this.state.timeout}
-            warningThreshold={WARNING_THRESHOLD}/>
+            warningThreshold={WARNING_THRESHOLD} />
           <MuteButton
             soundsManager={this.props.soundsManager}
-            muted={this.props.muted}/>
+            muted={this.props.muted} />
         </View>
         <View style={styles.targetNumberContainer}>
           <Text style={targetNumberTextStyle}>
