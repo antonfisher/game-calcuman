@@ -9,6 +9,7 @@ export default class SoundsManager {
     this.muted = false
     this.sounds = {}
     this.onChangeCallback = onChangeCallback
+    this.lastPlayed = null
 
     this.loadSound('toggle_on')
     this.loadSound('toggle_off')
@@ -21,6 +22,10 @@ export default class SoundsManager {
 
   play (key) {
     if (!this.muted) {
+      if (this.lastPlayed && this.lastPlayed.stop) {
+        this.lastPlayed.stop()
+      }
+      this.lastPlayed = this.sounds[key]
       this.sounds[key].play()
     }
   }
