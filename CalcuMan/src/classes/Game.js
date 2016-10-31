@@ -9,7 +9,7 @@ export default class Game {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
-    this.timeout = 10
+    this.timeout = 1000
   }
 
   startTimer () {

@@ -12,7 +12,7 @@ export default class Button extends Component {
     return {
       value: '',
       disabled: true,
-      onPress: function () {}
+      onClick: function () {}
     }
   }
 
@@ -20,7 +20,7 @@ export default class Button extends Component {
     return {
       value: React.PropTypes.string,
       disabled: React.PropTypes.bool,
-      onPress: React.PropTypes.func
+      onClick: React.PropTypes.func
     }
   }
 
@@ -32,7 +32,7 @@ export default class Button extends Component {
     }
   }
 
-  _onPressButton () {
+  onClick () {
     LayoutAnimation.configureNext({
       duration: 300,
       update: {
@@ -46,27 +46,29 @@ export default class Button extends Component {
       pressed: true
     })
 
-    this.setTimeout(() => { this.state.pressed = false }, 100)
+    this.setTimeout(() => {
+      this.state.pressed = false
+    }, 100)
 
-    this.props.onPress()
+    this.props.onClick()
   }
 
   render () {
-    let styleText = styles.text
-    let styleContainer = styles.container
+    const styleText = [styles.text]
+    const styleContainer = [styles.container]
     if (this.props.disabled) {
-      styleText = styles.textDisabled
-      styleContainer = styles.containerDisabled
+      styleText.push(styles.textDisabled)
+      styleContainer.push(styles.containerDisabled)
     } else if (this.state.pressed) {
-      styleText = styles.textPressed
-      styleContainer = styles.containerPressed
+      styleText.push(styles.textPressed)
+      styleContainer.push(styles.containerPressed)
     }
 
     return (
       <TouchableHighlight
         style={styleContainer}
-        onPress={this._onPressButton.bind(this)}
-        underlayColor={'gold'}
+        onPress={this.onClick.bind(this)}
+        underlayColor={'orange'}
         disabled={this.props.disabled}>
         <Text style={styleText} allowFontScaling>
           {this.props.value}
@@ -91,26 +93,13 @@ const styles = StyleSheet.create({
     margin: 15
   },
   containerPressed: {
-    flex: 1,
     backgroundColor: 'orange',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'orange',
-    borderRadius: 13,
-    borderWidth: 9,
-    padding: 5,
-    margin: 15,
     height: 20,
     width: 20
   },
   containerDisabled: {
-    flex: 1,
     backgroundColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 3,
-    padding: 5,
-    margin: 25
+    borderRadius: 3
   },
   text: {
     fontSize: 60,
@@ -118,8 +107,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   textPressed: {
-    fontSize: 1,
-    color: 'white'
+    fontSize: 1
   },
   textDisabled: {
     fontSize: 1,

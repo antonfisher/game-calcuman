@@ -101,12 +101,12 @@ export default class PlayLayout extends Component {
   }
 
   render () {
-    let targetNumberTextStyle = styles.targetNumberText
+    const targetNumberTextStyle = [styles.targetNumberText]
     if (this.state.gameOver) {
       if (this.state.isWin) {
-        targetNumberTextStyle = styles.targetNumberWinText
+        targetNumberTextStyle.push(styles.targetNumberWinText)
       } else {
-        targetNumberTextStyle = styles.targetNumberLoseText
+        targetNumberTextStyle.push(styles.targetNumberLoseText)
       }
     }
 
@@ -130,7 +130,7 @@ export default class PlayLayout extends Component {
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
         <View style={styles.bottomBar}>
-          <Text>AD</Text>
+          <Text></Text>
         </View>
       </View>
     )
@@ -174,35 +174,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'azure'
   },
+  topBar: {
+    height: 60,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingLeft: 1,
+    paddingRight: 3,
+    marginBottom: 15
+  },
   targetNumberContainer: {
     flex: 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 5
   },
   targetNumberText: {
     fontSize: 120,
     margin: 20,
-    marginTop: 15,
+    marginTop: 20,
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 5,
     textShadowColor: '#aaaaaa'
   },
   targetNumberWinText: {
-    fontSize: 120,
-    margin: 20,
-    marginTop: 30,
-    textShadowOffset: {width: 3, height: 3},
-    textShadowRadius: 5,
-    textShadowColor: '#aaaaaa',
     color: 'lightgreen'
   },
   targetNumberLoseText: {
-    fontSize: 120,
-    margin: 20,
-    marginTop: 30,
-    textShadowOffset: {width: 3, height: 3},
-    textShadowRadius: 5,
-    textShadowColor: '#aaaaaa',
     color: 'red'
   },
   gridContainer: {
@@ -212,15 +211,6 @@ const styles = StyleSheet.create({
   gridRow: {
     flex: 1,
     flexDirection: 'row'
-  },
-  topBar: {
-    height: 60,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingTop: 10,
-    paddingLeft: 1,
-    paddingRight: 3
   },
   bottomBar: {
     height: 60,

@@ -38,7 +38,7 @@ export default class MenuLayout extends Component {
           <View style={styles.menuItem}>
             <Button
               value={'PLAY'}
-              onPress={this.onPlayClick.bind(this)}
+              onClick={this.onPlayClick.bind(this)}
               disabled={false} />
           </View>
           <View style={styles.menuItem}>
