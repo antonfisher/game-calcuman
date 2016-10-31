@@ -13,14 +13,23 @@ import IconButton from '../../components/IconButton'
 import Game from '../../classes/Game'
 import Timer from '../Timer'
 
+const WARNING_THRESHOLD = 5
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500
-const WARNING_THRESHOLD = 5
 
 export default class PlayLayout extends Component {
   static get defaultProps () {
     return {
-      muted: false
+      muted: false,
+      buttonColors: [
+        'lightsteelblue',
+        'lightgreen',
+        'lightcoral',
+        'lightblue',
+        'lavender',
+        'lightsalmon',
+        '#a5d9e5'
+      ]
     }
   }
 
@@ -28,7 +37,8 @@ export default class PlayLayout extends Component {
     return {
       muted: React.PropTypes.bool,
       navigator: React.PropTypes.object,
-      soundsManager: React.PropTypes.object
+      soundsManager: React.PropTypes.object,
+      buttonColors: React.PropTypes.array
     }
   }
 
@@ -41,7 +51,14 @@ export default class PlayLayout extends Component {
       onTickCallback: this.onTimerTick.bind(this)
     })
     this.game.generateNext()
-    this.state = this.game.getState()
+    this.state = {
+      ...this.game.getState(),
+      ...{buttonColor: this.props.buttonColors[0]}
+    }
+  }
+
+  componentWillUnmount () {
+    this.game.stopTimer()
   }
 
   incSum (value) {
@@ -76,6 +93,8 @@ export default class PlayLayout extends Component {
   }
 
   generateNewGame () {
+    const {buttonColors} = this.props
+
     LayoutAnimation.configureNext({
       duration: 100,
       create: {
@@ -90,7 +109,10 @@ export default class PlayLayout extends Component {
     })
 
     this.game.generateNext()
-    this.setState(this.game.getState())
+    this.setState({
+      ...this.game.getState(),
+      ...{buttonColor: buttonColors[Math.round(Math.random() * buttonColors.length)]}
+    })
   }
 
   onTimerTick (timeout) {
@@ -130,7 +152,7 @@ export default class PlayLayout extends Component {
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
         <View style={styles.bottomBar}>
-          <Text></Text>
+          <Text>{this.state.buttonColor}</Text>
         </View>
       </View>
     )
@@ -162,7 +184,8 @@ export default class PlayLayout extends Component {
         value={this.state.values[valuesIndex].toString()}
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
-        disabled={this.state.gameOver} />
+        disabled={this.state.gameOver}
+        color={this.state.buttonColor} />
     )
   }
 }

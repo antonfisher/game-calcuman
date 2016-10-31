@@ -9,6 +9,7 @@ export default class ToggleButton extends Component {
   static get defaultProps () {
     return {
       value: '-',
+      color: '#a5d9e5',
       disabled: true,
       onUp: function () {},
       onDown: function () {}
@@ -18,6 +19,7 @@ export default class ToggleButton extends Component {
   static get propTypes () {
     return {
       value: React.PropTypes.string,
+      color: React.PropTypes.string,
       disabled: React.PropTypes.bool,
       onUp: React.PropTypes.func,
       onDown: React.PropTypes.func
@@ -62,13 +64,20 @@ export default class ToggleButton extends Component {
   }
 
   render () {
-    const styleText = (this.props.disabled ? styles.textDisabled : styles.text)
+    const {color, disabled} = this.props
 
-    let styleContainer = styles.container
-    if (this.props.disabled) {
-      styleContainer = styles.containerDisabled
+    const styleText = [styles.text]
+    let styleContainer = [styles.container]
+    if (disabled) {
+      styleText.push(styles.textDisabled)
+      styleContainer.push(styles.containerDisabled)
     } else if (this.state.pressed) {
-      styleContainer = styles.containerPressed
+      styleContainer.push(styles.containerPressed)
+    } else {
+      styleContainer = {
+        ...StyleSheet.flatten(styleContainer),
+        ...{backgroundColor: color}
+      }
     }
 
     return (
@@ -96,21 +105,14 @@ const styles = StyleSheet.create({
     margin: 15
   },
   containerPressed: {
-    flex: 1,
     backgroundColor: '#FFDA31',
-    justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 10,
     padding: 10,
     margin: 10
   },
   containerDisabled: {
-    flex: 1,
     backgroundColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 3,
-    padding: 5,
     margin: 25
   },
   text: {
