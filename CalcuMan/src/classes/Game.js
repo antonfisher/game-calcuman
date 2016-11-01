@@ -9,7 +9,8 @@ export default class Game {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
-    this.timeout = 10
+    this.timeout = 1000
+    this.solution = []
   }
 
   startTimer () {
@@ -75,12 +76,15 @@ export default class Game {
     const values = new Array(9).fill(0)
     const k = Math.floor(2 + 7 * Math.random())
 
+    this.solution = []
+
     for (let i = 0; i < 9; i++) {
       values[i] = (targetNum - values.reduce((a, b) => a + b, 0))
       if (i <= k && values[i] > 0) {
         if (i < k && values[i] > 2) {
           values[i] = Math.max(1, Math.ceil(0.6 * Math.random() * values[i]))
         }
+        this.solution.push(values[i])
       } else {
         values[i] = Math.max(1, Math.ceil(Math.random() * (targetNum - 1)))
       }

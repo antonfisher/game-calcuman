@@ -13,6 +13,7 @@ import IconButton from '../../components/IconButton'
 import Game from '../../classes/Game'
 import Timer from '../Timer'
 
+const START_NUMBER = 10;
 const WARNING_THRESHOLD = 5
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500
@@ -46,15 +47,24 @@ export default class PlayLayout extends Component {
     super(props)
 
     this.game = new Game({
-      targetNum: 9,
+      targetNum: START_NUMBER - 1,
       onTimeOverCallback: this.updateGameState.bind(this),
       onTickCallback: this.onTimerTick.bind(this)
     })
+
     this.game.generateNext()
+
     this.state = {
       ...this.game.getState(),
-      ...{buttonColor: this.props.buttonColors[0]}
+      ...{
+        demo: true,
+        buttonColor: this.props.buttonColors[0]
+      }
     }
+
+    //weird
+    this._demoPressSec = 0
+    this._solution = this.game.solution
   }
 
   componentWillUnmount () {
@@ -111,7 +121,10 @@ export default class PlayLayout extends Component {
     this.game.generateNext()
     this.setState({
       ...this.game.getState(),
-      ...{buttonColor: buttonColors[Math.round(Math.random() * buttonColors.length)]}
+      ...{
+        demo: false,
+        buttonColor: buttonColors[Math.floor(Math.random() * buttonColors.length)]
+      }
     })
   }
 
@@ -152,7 +165,7 @@ export default class PlayLayout extends Component {
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
         <View style={styles.bottomBar}>
-          <Text>{this.state.buttonColor}</Text>
+          <Text>{this.state.buttonColor} - {this.state.demo ? 'yes' : 'no'}</Text>
         </View>
       </View>
     )
@@ -179,13 +192,26 @@ export default class PlayLayout extends Component {
   }
 
   renderGridRowButton (valuesIndex) {
+    let demoPressSec = 0
+    const value = this.state.values[valuesIndex]
+
+    if (this.state.demo) {
+      const index = this._solution.indexOf(value)
+      if (index !== -1) {
+        this._demoPressSec++
+        this._solution = this._solution.filter((v, k) => (k !== index))
+        demoPressSec = this._demoPressSec
+      }
+    }
+
     return (
       <ToggleButton
-        value={this.state.values[valuesIndex].toString()}
+        value={value.toString()}
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
         disabled={this.state.gameOver}
-        color={this.state.buttonColor} />
+        color={this.state.buttonColor}
+        demoPressSec={demoPressSec} />
     )
   }
 }

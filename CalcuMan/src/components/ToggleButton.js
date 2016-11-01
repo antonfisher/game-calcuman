@@ -11,6 +11,7 @@ export default class ToggleButton extends Component {
       value: '-',
       color: '#a5d9e5',
       disabled: true,
+      demoPressSec: 0,
       onUp: function () {},
       onDown: function () {}
     }
@@ -21,6 +22,7 @@ export default class ToggleButton extends Component {
       value: React.PropTypes.string,
       color: React.PropTypes.string,
       disabled: React.PropTypes.bool,
+      demoPressSec: React.PropTypes.number,
       onUp: React.PropTypes.func,
       onDown: React.PropTypes.func
     }
@@ -34,7 +36,17 @@ export default class ToggleButton extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.demoPressSec > 0) {
+      //TODO use mixin
+      setTimeout(() => {
+        this.onPressButton()
+      }, 2000 + this.props.demoPressSec * 1500)
+    }
+  }
+
   onPressButton () {
+    const pressed = !this.state.pressed
     LayoutAnimation.configureNext({
       duration: 200,
       update: {
@@ -45,13 +57,13 @@ export default class ToggleButton extends Component {
     })
 
     this.setState({
-      pressed: !this.state.pressed
+      pressed: pressed
     })
 
-    if (this.state.pressed) {
-      this.props.onUp(this.props.value)
-    } else {
+    if (pressed) {
       this.props.onDown(this.props.value)
+    } else {
+      this.props.onUp(this.props.value)
     }
   }
 
