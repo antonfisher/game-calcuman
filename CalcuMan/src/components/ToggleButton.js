@@ -7,6 +7,9 @@ import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-nativ
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
+const DEMO_CLICK_DELAY = 1000;
+const DEMO_CLICK_INTERVAL = 700;
+
 export default class ToggleButton extends Component {
   static get defaultProps () {
     return {
@@ -42,13 +45,14 @@ export default class ToggleButton extends Component {
 
   componentDidMount() {
     if (this.props.demoPressSec > 0) {
-      this.setTimeout(() => {
-        this.onPressButton(true)
-      }, 1000 + this.props.demoPressSec * 1000)
+      this.setTimeout(
+        this.onPressButton.bind(this, true),
+        DEMO_CLICK_DELAY + this.props.demoPressSec * DEMO_CLICK_INTERVAL
+      )
     }
   }
 
-  onPressButton (force = false) {
+  onPressButton (force) {
     if (this.props.demo && !force) {
       return
     }
@@ -102,7 +106,7 @@ export default class ToggleButton extends Component {
     return (
       <TouchableHighlight
         style={styleContainer}
-        onPress={this.onPressButton.bind(this)}
+        onPress={this.onPressButton.bind(this, false)}
         disabled={this.props.disabled}
         underlayColor={'gold'}>
         <Text style={styleText} allowFontScaling>
