@@ -9,7 +9,10 @@ export default class SoundsManager {
     this.muted = false
     this.sounds = {}
     this.onChangeCallback = onChangeCallback
-    this.lastPlayed = null
+
+    // there is an issue with sound liblary
+    this._blockPlaying = false
+    this._blockPlayingTimeout = null
 
     this.loadSound('toggle_on')
     this.loadSound('toggle_off')
@@ -21,13 +24,24 @@ export default class SoundsManager {
   }
 
   play (key) {
-    if (!this.muted) {
-      if (this.lastPlayed && this.lastPlayed.stop) {
-        this.lastPlayed.stop()
-      }
-      this.lastPlayed = this.sounds[key]
-      //this.sounds[key].play()
+    if (this.muted || !this.sounds[key].isLoaded()) {
+      return
+    } else if (this._blockPlaying) {
+      // wait for playing end
+      clearTimeout(this._blockPlayingTimeout)
+      this._blockPlayingTimeout = setTimeout(() => (this.play(key)), 100)
+      return;
     }
+
+    this._blockPlaying = true
+
+    // sometimes play callbakc does not work
+    setTimeout(
+      () => (this._blockPlaying = false),
+      this.sounds[key].getDuration() * 1000 + 50
+    )
+
+    this.sounds[key].play()
   }
 
   setMuted (muted) {
