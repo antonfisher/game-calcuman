@@ -93,9 +93,7 @@ const styles = StyleSheet.create({
     margin: 15
   },
   containerPressed: {
-    backgroundColor: 'orange',
-    height: 20,
-    width: 20
+    backgroundColor: 'orange'
   },
   containerDisabled: {
     backgroundColor: 'lightgray',
@@ -107,10 +105,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   textPressed: {
-    fontSize: 1
+    color: 'white'
   },
   textDisabled: {
-    fontSize: 1,
     color: 'lightgray'
   }
 })

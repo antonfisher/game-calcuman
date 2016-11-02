@@ -26,7 +26,7 @@ export default class SoundsManager {
         this.lastPlayed.stop()
       }
       this.lastPlayed = this.sounds[key]
-      this.sounds[key].play()
+      //this.sounds[key].play()
     }
   }
 

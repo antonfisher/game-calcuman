@@ -74,7 +74,11 @@ export default class PlayLayout extends Component {
   incSum (value) {
     this.props.soundsManager.play('toggle_off')
     this.game.incSum(Number(value))
-    this.updateGameState()
+    if (this.state.demo) {
+      this.setTimeout(this.updateGameState, 2 * WIN_SCREEN_DELAY)
+    } else {
+      this.updateGameState()
+    }
   }
 
   decSum (value) {
@@ -165,7 +169,7 @@ export default class PlayLayout extends Component {
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
         <View style={styles.bottomBar}>
-          <Text>{this.state.buttonColor} - {this.state.demo ? 'yes' : 'no'}</Text>
+          <Text>{this.state.buttonColor} - [{this.game.solution.join(',')}]</Text>
         </View>
       </View>
     )
@@ -193,9 +197,10 @@ export default class PlayLayout extends Component {
 
   renderGridRowButton (valuesIndex) {
     let demoPressSec = 0
+    const {demo, buttonColor, gameOver} = this.state
     const value = this.state.values[valuesIndex]
 
-    if (this.state.demo) {
+    if (demo) {
       const index = this._solution.indexOf(value)
       if (index !== -1) {
         this._demoPressSec++
@@ -209,9 +214,10 @@ export default class PlayLayout extends Component {
         value={value.toString()}
         onDown={this.incSum.bind(this)}
         onUp={this.decSum.bind(this)}
-        disabled={this.state.gameOver}
-        color={this.state.buttonColor}
-        demoPressSec={demoPressSec} />
+        disabled={gameOver}
+        color={buttonColor}
+        demoPressSec={demoPressSec}
+        demo={demo} />
     )
   }
 }
@@ -248,10 +254,12 @@ const styles = StyleSheet.create({
     textShadowColor: '#aaaaaa'
   },
   targetNumberWinText: {
-    color: 'lightgreen'
+    color: 'lightgreen',
+    marginTop: 0
   },
   targetNumberLoseText: {
-    color: 'red'
+    color: 'red',
+    marginTop: 0
   },
   gridContainer: {
     flex: 5,

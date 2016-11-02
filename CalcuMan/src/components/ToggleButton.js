@@ -4,6 +4,8 @@
 
 import React, {Component} from 'react'
 import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-native'
+import reactMixin from 'react-mixin'
+import TimerMixin from 'react-timer-mixin'
 
 export default class ToggleButton extends Component {
   static get defaultProps () {
@@ -11,6 +13,7 @@ export default class ToggleButton extends Component {
       value: '-',
       color: '#a5d9e5',
       disabled: true,
+      demo: false,
       demoPressSec: 0,
       onUp: function () {},
       onDown: function () {}
@@ -22,6 +25,7 @@ export default class ToggleButton extends Component {
       value: React.PropTypes.string,
       color: React.PropTypes.string,
       disabled: React.PropTypes.bool,
+      demo: React.PropTypes.bool,
       demoPressSec: React.PropTypes.number,
       onUp: React.PropTypes.func,
       onDown: React.PropTypes.func
@@ -38,14 +42,17 @@ export default class ToggleButton extends Component {
 
   componentDidMount() {
     if (this.props.demoPressSec > 0) {
-      //TODO use mixin
-      setTimeout(() => {
-        this.onPressButton()
-      }, 2000 + this.props.demoPressSec * 1500)
+      this.setTimeout(() => {
+        this.onPressButton(true)
+      }, 1000 + this.props.demoPressSec * 1000)
     }
   }
 
-  onPressButton () {
+  onPressButton (force = false) {
+    if (this.props.demo && !force) {
+      return
+    }
+
     const pressed = !this.state.pressed
     LayoutAnimation.configureNext({
       duration: 200,
@@ -106,6 +113,8 @@ export default class ToggleButton extends Component {
   }
 }
 
+reactMixin.onClass(ToggleButton, TimerMixin)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,12 +123,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 7,
     padding: 5,
+    paddingBottom: 9,
     margin: 15
   },
   containerPressed: {
     backgroundColor: '#FFDA31',
     borderRadius: 10,
     padding: 10,
+    paddingBottom: 14,
     margin: 10
   },
   containerDisabled: {
