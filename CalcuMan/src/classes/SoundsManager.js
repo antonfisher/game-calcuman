@@ -30,7 +30,7 @@ export default class SoundsManager {
       // wait for playing end
       clearTimeout(this._blockPlayingTimeout)
       this._blockPlayingTimeout = setTimeout(() => (this.play(key)), 100)
-      return;
+      return
     }
 
     this._blockPlaying = true

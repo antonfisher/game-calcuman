@@ -4,12 +4,14 @@
 
 import arrayShuffle from '../functions/arrayShuffle.js'
 
+const GAME_INIT_TIMEOUT_SEC = 10
+
 export default class Game {
   constructor ({targetNum, onTimeOverCallback, onTickCallback}) {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
-    this.timeout = 1000
+    this.timeout = GAME_INIT_TIMEOUT_SEC
     this.solution = []
   }
 

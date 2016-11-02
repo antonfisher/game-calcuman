@@ -7,8 +7,8 @@ import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-nativ
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
-const DEMO_CLICK_DELAY = 1000;
-const DEMO_CLICK_INTERVAL = 700;
+const DEMO_CLICK_DELAY = 1000
+const DEMO_CLICK_INTERVAL = 700
 
 export default class ToggleButton extends Component {
   static get defaultProps () {
@@ -43,7 +43,7 @@ export default class ToggleButton extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.demoPressSec > 0) {
       this.setTimeout(
         this.onPressButton.bind(this, true),

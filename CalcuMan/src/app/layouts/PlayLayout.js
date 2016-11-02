@@ -13,7 +13,7 @@ import IconButton from '../../components/IconButton'
 import Game from '../../classes/Game'
 import Timer from '../Timer'
 
-const START_NUMBER = 10;
+const START_NUMBER = 10
 const WARNING_THRESHOLD = 5
 const WIN_SCREEN_DELAY = 1500
 const LOSE_SCREEN_DELAY = 1500
@@ -62,7 +62,7 @@ export default class PlayLayout extends Component {
       }
     }
 
-    //weird
+    // weird
     this._demoPressSec = 0
     this._solution = this.game.solution
   }
