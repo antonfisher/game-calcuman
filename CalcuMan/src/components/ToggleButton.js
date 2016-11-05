@@ -87,12 +87,10 @@ export default class ToggleButton extends Component {
   }
 
   render () {
-    const {color, disabled} = this.props
+    const {color, disabled, value} = this.props
 
-    const styleText = [styles.text]
     let styleContainer = [styles.container]
     if (disabled) {
-      styleText.push(styles.textDisabled)
       styleContainer.push(styles.containerDisabled)
     } else if (this.state.pressed) {
       styleContainer.push(styles.containerPressed)
@@ -100,6 +98,16 @@ export default class ToggleButton extends Component {
       styleContainer = {
         ...StyleSheet.flatten(styleContainer),
         ...{backgroundColor: color}
+      }
+    }
+
+    let styleText = [styles.text]
+    if (disabled) {
+      styleText.push(styles.textDisabled)
+    } else {
+      styleText = {
+        ...StyleSheet.flatten(styleText),
+        ...{fontSize: (120 / Math.max(value.length, 2))}
       }
     }
 
@@ -143,7 +151,6 @@ const styles = StyleSheet.create({
     margin: 25
   },
   text: {
-    fontSize: 60,
     color: 'darkslategray'
   },
   textDisabled: {
