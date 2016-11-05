@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Anton Fisher <a.fschr@gmail.com> (http://antonfisher.com)",
   "description": "React Native simple math game",
-  "license": "MIT",
+  "license": "Anton Fisher",
   "devDependencies": {
     "react-native-cli": "1.0.0"
   }
