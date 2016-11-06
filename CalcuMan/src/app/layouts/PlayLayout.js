@@ -25,7 +25,6 @@ export default class PlayLayout extends Component {
       buttonColors: [
         'lightsteelblue',
         'lightgreen',
-        'lightcoral',
         'lightblue',
         'lavender',
         'lightsalmon',
