@@ -7,7 +7,7 @@ import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-nativ
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
-const DEMO_CLICK_DELAY = 1000
+const DEMO_CLICK_DELAY = 750
 const DEMO_CLICK_INTERVAL = 700
 
 export default class ToggleButton extends Component {

@@ -155,6 +155,7 @@ export default class PlayLayout extends Component {
             name={'arrow-back'}
             onClick={this.props.navigator.pop} />
           <Timer
+            demo={this.state.demo}
             timeout={this.state.timeout}
             warningThreshold={WARNING_THRESHOLD} />
           <MuteButton

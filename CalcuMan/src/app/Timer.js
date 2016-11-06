@@ -13,6 +13,7 @@ const ICON_SIZE = 30
 export default class Timer extends Component {
   static get defaultProps () {
     return {
+      demo: false,
       timeout: 0,
       warningThreshold: 5
     }
@@ -20,13 +21,20 @@ export default class Timer extends Component {
 
   static get propTypes () {
     return {
+      demo: React.PropTypes.bool,
       timeout: React.PropTypes.number,
       warningThreshold: React.PropTypes.number
     }
   }
 
   render () {
-    if (this.props.timeout) {
+    if (this.props.demo) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>How to play?</Text>
+        </View>
+      )
+    } else if (this.props.timeout) {
       let color = COLOR_DEFAULT
       let textStyle = [styles.text]
       if (this.props.timeout <= this.props.warningThreshold) {
