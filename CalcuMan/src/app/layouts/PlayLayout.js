@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, LayoutAnimation} from 'react-native'
+import {StyleSheet, Text, View, LayoutAnimation, Image} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
@@ -25,7 +25,6 @@ export default class PlayLayout extends Component {
       buttonColors: [
         'lightsteelblue',
         'lightgreen',
-        'lightblue',
         'lavender',
         'lightsalmon',
         '#a5d9e5'
@@ -149,7 +148,7 @@ export default class PlayLayout extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <Image source={require('./img/background-80.png')} style={styles.container}>
         <View style={styles.topBar}>
           <IconButton
             name={'arrow-back'}
@@ -168,10 +167,8 @@ export default class PlayLayout extends Component {
           </Text>
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
-        <View style={styles.bottomBar}>
-          <Text>{this.state.buttonColor} - [{this.game.solution.join(',')}]</Text>
-        </View>
-      </View>
+        <View style={styles.bottomBar} />
+      </Image>
     )
   }
 
@@ -227,7 +224,9 @@ reactMixin.onClass(PlayLayout, TimerMixin)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'azure'
+    width: null,
+    height: null,
+    resizeMode: Image.resizeMode.stretch
   },
   topBar: {
     height: 60,
@@ -271,7 +270,7 @@ const styles = StyleSheet.create({
   },
   bottomBar: {
     height: 60,
-    backgroundColor: 'silver',
+    backgroundColor: 'lightgray',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10
