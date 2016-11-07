@@ -34,6 +34,7 @@ export default class PlayLayout extends Component {
 
   static get propTypes () {
     return {
+      ga: React.PropTypes.object,
       muted: React.PropTypes.bool,
       navigator: React.PropTypes.object,
       soundsManager: React.PropTypes.object,
@@ -63,6 +64,8 @@ export default class PlayLayout extends Component {
     // weird
     this._demoPressSec = 0
     this._solution = this.game.solution
+
+    this.props.ga.trackScreenView('Open-application')
   }
 
   componentWillUnmount () {
@@ -99,6 +102,14 @@ export default class PlayLayout extends Component {
       if (this.game.isWin) {
         this.setTimeout(this.generateNewGame, WIN_SCREEN_DELAY)
       } else {
+        this.props.ga.trackEvent(
+          'Game',
+          'game-over',
+          {
+            label: 'target-number',
+            value: this.state.targetNum
+          }
+        )
         this.setTimeout(this.props.navigator.pop, LOSE_SCREEN_DELAY)
       }
     }
@@ -167,7 +178,9 @@ export default class PlayLayout extends Component {
           </Text>
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
-        <View style={styles.bottomBar} />
+        <View style={styles.bottomBar}>
+          <Text>{this.state.buttonColor}</Text>
+        </View>
       </Image>
     )
   }

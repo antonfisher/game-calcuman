@@ -6,6 +6,6 @@ React Native simple math game
 
 - [x] demo label
 - [x] add background
-- [ ] flow
-- [ ] google analytics
+- [x] google analytics
 - [ ] how to update react-native
+- [ ] flow
