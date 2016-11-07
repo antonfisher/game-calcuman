@@ -64,7 +64,7 @@ export default class PlayLayout extends Component {
     this._demoPressSec = 0
     this._solution = this.game.solution
 
-    this.props.ga.trackScreenView('Open-application')
+    this.props.ga.eventOpenApplication()
   }
 
   componentWillUnmount () {
@@ -101,14 +101,7 @@ export default class PlayLayout extends Component {
       if (this.game.isWin) {
         this.setTimeout(this.generateNewGame, WIN_SCREEN_DELAY)
       } else {
-        this.props.ga.trackEvent(
-          'Game',
-          'game-over',
-          {
-            label: 'target-number',
-            value: this.state.targetNum
-          }
-        )
+        this.props.ga.eventGameOver(this.state.targetNum)
         this.setTimeout(this.props.navigator.pop, LOSE_SCREEN_DELAY)
       }
     }

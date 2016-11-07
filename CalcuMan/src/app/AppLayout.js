@@ -4,36 +4,23 @@
 
 import React, {Component} from 'react'
 import {Navigator} from 'react-native'
-import {GoogleAnalyticsTracker} from 'react-native-google-analytics-bridge'
-
-import {gaNumber} from './gaNumber.js'
 
 import MenuLayout from './layouts/MenuLayout'
 import PlayLayout from './layouts/PlayLayout'
 
+import GA from '../classes/GA'
 import SoundsManager from '../classes/SoundsManager'
+import {gaNumber} from '../configs/gaNumber'
 
 export default class AppLayout extends Component {
   constructor (props) {
     super(props)
 
+    this.ga = new GA(gaNumber)
     this.soundsManager = new SoundsManager((muted) => this.setState({muted}))
 
     this.state = {
       muted: this.soundsManager.muted
-    }
-
-    if (__DEV__) {
-      this.ga = {
-        trackScreenView: (...args) => {
-          console.log('GA: trackScreenView', ...args)
-        },
-        trackEvent: (...args) => {
-          console.log('GA: trackEvent', ...args)
-        }
-      }
-    } else {
-      this.ga = new GoogleAnalyticsTracker(gaNumber)
     }
   }
 
