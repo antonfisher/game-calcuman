@@ -3,7 +3,13 @@
  */
 
 import React, {Component} from 'react'
-import {StyleSheet, Text, TouchableHighlight, LayoutAnimation} from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  LayoutAnimation,
+  Dimensions
+} from 'react-native'
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
@@ -105,9 +111,12 @@ export default class ToggleButton extends Component {
     if (disabled) {
       styleText.push(styles.textDisabled)
     } else {
+      const {height, width} = Dimensions.get('window')
+      const x = Math.min(height, width)
+
       styleText = {
         ...StyleSheet.flatten(styleText),
-        ...{fontSize: (120 / Math.max(value.length, 2))}
+        ...{fontSize: (x / 3.2 / Math.max(value.length, 2))}
       }
     }
 
