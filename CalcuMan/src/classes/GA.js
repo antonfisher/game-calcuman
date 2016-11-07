@@ -6,7 +6,7 @@ import {GoogleAnalyticsTracker} from 'react-native-google-analytics-bridge'
 
 export default class GA {
   constructor (gaNumber) {
-    if (__DEV__) {
+    if (__DEV__) { // eslint-disable-line
       this.ga = {
         trackScreenView: (...args) => {
           console.log('GA: trackScreenView', ...args)
@@ -20,11 +20,11 @@ export default class GA {
     }
   }
 
-  eventOpenApplication() {
+  eventOpenApplication () {
     this.ga.trackScreenView('Open-application')
   }
 
-  eventGameOver(targetNum) {
+  eventGameOver (targetNum) {
     this.ga.trackEvent(
       'Game',
       'game-over',
