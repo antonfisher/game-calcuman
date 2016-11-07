@@ -27,7 +27,7 @@ export default class GA {
   eventGameOver (targetNum) {
     this.ga.trackEvent(
       'Game',
-      'game-over',
+      `game-over-${targetNum}`,
       {
         label: 'target-number',
         value: targetNum

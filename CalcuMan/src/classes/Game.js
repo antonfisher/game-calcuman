@@ -5,6 +5,7 @@
 import arrayShuffle from '../functions/arrayShuffle.js'
 
 const GAME_INIT_TIMEOUT_SEC = 10
+const GAME_TIMEOUT_INCREASE = 4
 
 export default class Game {
   constructor ({targetNum, onTimeOverCallback, onTickCallback}) {
@@ -37,7 +38,7 @@ export default class Game {
     this.isWin = false
     this.gameOver = false
     this.targetNum += 1
-    this.timeout += 5
+    this.timeout += GAME_TIMEOUT_INCREASE
     this.values = arrayShuffle(this.generateValues(this.targetNum))
     this.startTimer()
   }
