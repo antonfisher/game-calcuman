@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   targetNumberLoseText: {
-    color: 'red',
+    color: 'indianred',
     marginTop: 0
   },
   gridContainer: {
