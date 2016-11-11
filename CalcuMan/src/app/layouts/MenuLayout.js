@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import {StyleSheet, View, Image} from 'react-native'
+import {StyleSheet, View, Image, Text} from 'react-native'
 
 import Button from '../../components/Button'
 import MuteButton from '../buttons/MuteButton'
@@ -44,6 +44,9 @@ export default class MenuLayout extends Component {
               soundsManager={this.props.soundsManager}
               muted={this.props.muted} />
           </View>
+          <View style={styles.versionItem}>
+            <Text style={styles.versionText}>v1.0.0</Text>
+          </View>
         </View>
       </Image>
     )
@@ -66,11 +69,19 @@ const styles = StyleSheet.create({
     flex: 2,
     margin: 20,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   menuItem: {
     marginBottom: 20,
     flexDirection: 'row'
+  },
+  versionItem: {
+    marginTop: 40,
+    marginBottom: 0
+  },
+  versionText: {
+    color: 'gray',
+    fontSize: 11
   }
 })
