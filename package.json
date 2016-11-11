@@ -5,6 +5,6 @@
   "description": "React Native simple math game",
   "license": "Anton Fisher",
   "devDependencies": {
-    "react-native-cli": "1.0.0"
+    "react-native-cli": "1.2.0"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "name": "Calcuman",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "emulator": "emulator -list-avds && emulator @Nexus_1",
@@ -10,8 +11,8 @@
   "dependencies": {
     "react": "15.3.2",
     "react-mixin": "3.0.5",
-    "react-native": "0.34.1",
-    "react-native-google-analytics-bridge": "4.0.0",
+    "react-native": "0.37.0",
+    "react-native-google-analytics-bridge": "4.0.1",
     "react-native-sound": "0.8.3",
     "react-native-vector-icons": "3.0.0",
     "react-timer-mixin": "0.13.3"

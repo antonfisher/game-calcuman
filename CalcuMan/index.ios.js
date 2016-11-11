@@ -18,4 +18,4 @@ class App extends Component {
   }
 }
 
-AppRegistry.registerComponent('CalcuMan', () => App)
+AppRegistry.registerComponent('Calcuman', () => App)
