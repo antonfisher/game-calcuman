@@ -170,9 +170,7 @@ export default class PlayLayout extends Component {
           </Text>
         </View>
         {this.state.gameOver ? null : this.renderGridContainer()}
-        <View style={styles.bottomBar}>
-          <Text>{this.state.buttonColor}</Text>
-        </View>
+        <View style={styles.bottomBar} />
       </Image>
     )
   }

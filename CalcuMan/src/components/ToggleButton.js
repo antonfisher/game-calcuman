@@ -13,8 +13,8 @@ import {
 import reactMixin from 'react-mixin'
 import TimerMixin from 'react-timer-mixin'
 
-const DEMO_CLICK_DELAY = 750
-const DEMO_CLICK_INTERVAL = 700
+const DEMO_CLICK_DELAY = 500
+const DEMO_CLICK_INTERVAL = 600
 
 export default class ToggleButton extends Component {
   static get defaultProps () {

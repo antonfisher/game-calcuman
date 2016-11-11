@@ -5,7 +5,7 @@
 import arrayShuffle from '../functions/arrayShuffle.js'
 
 const GAME_INIT_TIMEOUT_SEC = 10
-const GAME_TIMEOUT_INCREASE = 4
+const GAME_TIMEOUT_INCREASE = 3
 
 export default class Game {
   constructor ({targetNum, onTimeOverCallback, onTickCallback}) {
