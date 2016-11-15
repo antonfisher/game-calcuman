@@ -1,11 +1,5 @@
-# game-calcuman
+# Calcuman
 
-React Native simple math game 
-
-## ToDo
-
-- [x] demo label
-- [x] add background
-- [x] google analytics
-- [ ] how to update react-native
-- [ ] flow
+There is React Native simple math game.
+ 
+Try on [Google Play](https://play.google.com/store/apps/details?id=com.calcuman).
