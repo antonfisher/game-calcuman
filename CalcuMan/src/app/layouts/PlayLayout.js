@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   targetNumberText: {
-    fontSize: 120,
+    fontSize: 110,
     margin: 20,
     marginTop: 20,
     textShadowOffset: {width: 3, height: 3},

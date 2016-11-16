@@ -45,7 +45,7 @@ export default class MenuLayout extends Component {
               muted={this.props.muted} />
           </View>
           <View style={styles.versionItem}>
-            <Text style={styles.versionText}>v1.0.0</Text>
+            <Text style={styles.versionText}>v1.0.1</Text>
           </View>
         </View>
       </Image>

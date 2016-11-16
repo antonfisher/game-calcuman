@@ -116,7 +116,7 @@ export default class ToggleButton extends Component {
 
       styleText = {
         ...StyleSheet.flatten(styleText),
-        ...{fontSize: (x / 3.2 / Math.max(value.length, 2))}
+        ...{fontSize: (x / 4.3 / Math.max(value.length, 2))}
       }
     }
 
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 7,
     padding: 5,
-    paddingBottom: 9,
+    paddingBottom: 7,
     margin: 15
   },
   containerPressed: {

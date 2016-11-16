@@ -6,7 +6,7 @@ import React, {Component} from 'react'
 import {StyleSheet, TouchableHighlight} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const ICON_SIZE = 30
+const ICON_SIZE = 25
 
 export default class IconButton extends Component {
   static get defaultProps () {

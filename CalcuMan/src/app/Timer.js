@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const COLOR_DEFAULT = 'gray'
 const COLOR_WARNING = 'indianred'
-const ICON_SIZE = 30
+const ICON_SIZE = 25
 
 export default class Timer extends Component {
   static get defaultProps () {
