@@ -9,18 +9,41 @@ import MenuLayout from './layouts/MenuLayout'
 import PlayLayout from './layouts/PlayLayout'
 
 import GA from '../classes/GA'
-import SoundsManager from '../classes/SoundsManager'
+import Storage from '../classes/Storage'
 import {gaNumber} from '../configs/gaNumber'
+import SoundsManager from '../classes/SoundsManager'
+
+const MAX_SCORE_DEFAULT_VALUE = 10
 
 export default class AppLayout extends Component {
   constructor (props) {
     super(props)
 
     this.ga = new GA(gaNumber)
+    this.storage = new Storage()
     this.soundsManager = new SoundsManager((muted) => this.setState({muted}))
 
     this.state = {
-      muted: this.soundsManager.muted
+      muted: this.soundsManager.muted,
+      maxScore: MAX_SCORE_DEFAULT_VALUE
+    }
+
+    this.storage.getMaxScore()
+      .then((maxScore) => {
+        if (maxScore) {
+          this.setState({maxScore})
+        }
+      })
+      .done()
+  }
+
+  onMaxScoreUpdate (maxScore) {
+    if (maxScore > this.state.maxScore) {
+      this.storage.setMaxScore(maxScore)
+        .then(() => {
+          this.setState({maxScore})
+        })
+        .done()
     }
   }
 
@@ -33,16 +56,18 @@ export default class AppLayout extends Component {
             return (
               <MenuLayout
                 navigator={navigator}
-                soundsManager={this.soundsManager}
-                muted={this.state.muted} />
+                muted={this.state.muted}
+                maxScore={this.state.maxScore}
+                soundsManager={this.soundsManager} />
             )
           } else {
             return (
               <PlayLayout
+                ga={this.ga}
                 navigator={navigator}
-                soundsManager={this.soundsManager}
                 muted={this.state.muted}
-                ga={this.ga} />
+                soundsManager={this.soundsManager}
+                onMaxScoreUpdate={this.onMaxScoreUpdate.bind(this)} />
             )
           }
         }} />

@@ -11,6 +11,7 @@ import MuteButton from '../buttons/MuteButton'
 export default class MenuLayout extends Component {
   static get defaultProps () {
     return {
+      maxScore: 0,
       muted: false
     }
   }
@@ -18,6 +19,7 @@ export default class MenuLayout extends Component {
   static get propTypes () {
     return {
       muted: React.PropTypes.bool,
+      maxScore: React.PropTypes.number,
       navigator: React.PropTypes.object,
       soundsManager: React.PropTypes.object
     }
@@ -38,6 +40,10 @@ export default class MenuLayout extends Component {
               value={'PLAY'}
               onClick={this.onPlayClick.bind(this)}
               disabled={false} />
+          </View>
+          <View style={styles.manuScoreItem}>
+            <Text style={styles.maxScoreTitle}>Max score:</Text>
+            <Text style={styles.maxScoreText}>{this.props.maxScore}</Text>
           </View>
           <View style={styles.menuItem}>
             <MuteButton
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   menuContainer: {
-    flex: 2,
+    flex: 4,
     margin: 20,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -76,9 +82,23 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flexDirection: 'row'
   },
+  manuScoreItem: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    marginBottom: 30
+  },
   versionItem: {
-    marginTop: 40,
+    marginTop: 25,
     marginBottom: 0
+  },
+  maxScoreTitle: {
+    color: 'gray',
+    fontSize: 13
+  },
+  maxScoreText: {
+    fontWeight: 'bold',
+    fontSize: 50
   },
   versionText: {
     color: 'gray',

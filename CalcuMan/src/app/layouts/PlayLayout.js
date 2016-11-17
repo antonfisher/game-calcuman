@@ -36,8 +36,9 @@ export default class PlayLayout extends Component {
       ga: React.PropTypes.object,
       muted: React.PropTypes.bool,
       navigator: React.PropTypes.object,
+      buttonColors: React.PropTypes.array,
       soundsManager: React.PropTypes.object,
-      buttonColors: React.PropTypes.array
+      onMaxScoreUpdate: React.PropTypes.func
     }
   }
 
@@ -98,6 +99,8 @@ export default class PlayLayout extends Component {
     })
 
     if (this.game.gameOver) {
+      this.props.onMaxScoreUpdate(this.state.targetNum)
+
       if (this.game.isWin) {
         this.setTimeout(this.generateNewGame, WIN_SCREEN_DELAY)
       } else {
