@@ -11,12 +11,14 @@
     "build:release": "cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
+    "material-ui": "0.16.4",
     "react": "15.3.2",
     "react-mixin": "3.0.5",
     "react-native": "0.37.0",
-    "react-native-google-analytics-bridge": "4.0.1",
+    "react-native-google-analytics-bridge": "4.0.2",
     "react-native-sound": "0.8.3",
     "react-native-vector-icons": "3.0.0",
+    "react-tap-event-plugin": "2.0.1",
     "react-timer-mixin": "0.13.3"
   },
   "jest": {
@@ -27,9 +29,9 @@
     "babel-preset-react-native": "1.9.0",
     "jest": "17.0.3",
     "jest-react-native": "17.0.3",
-    "react-test-renderer": "15.3.2",
-    "flow-bin": "0.34.0",
+    "react-test-renderer": "15.4.1",
+    "flow-bin": "0.36.0",
     "snazzy": "5.0.0",
-    "standard": "8.5.0"
+    "standard": "8.6.0"
   }
 }

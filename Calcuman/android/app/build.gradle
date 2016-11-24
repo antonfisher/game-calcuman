@@ -118,10 +118,14 @@ android {
         }
     }
     buildTypes {
+        debug {
+            manifestPlaceholders = [permissionName: "android.permission.KOKOKO"]
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
+            manifestPlaceholders = [permissionName: "android.permission.SYSTEM_ALERT_WINDOW"]
         }
     }
     // applicationVariants are e.g. debug, release
