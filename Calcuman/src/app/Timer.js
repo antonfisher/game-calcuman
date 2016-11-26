@@ -68,7 +68,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLOR_DEFAULT
+    color: COLOR_DEFAULT,
+    textShadowRadius: 2,
+    textShadowColor: '#aaaaaa',
+    textShadowOffset: {width: 1, height: 1}
   },
   textWarning: {
     color: COLOR_WARNING

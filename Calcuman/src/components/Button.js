@@ -84,20 +84,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#6BC0D5',
-    justifyContent: 'center',
+    borderRadius: 2,
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,.5)',
     alignItems: 'center',
-    borderColor: 'gold',
-    borderRadius: 13,
-    borderWidth: 9,
-    padding: 5,
-    margin: 15
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    margin: 6
   },
   containerPressed: {
     backgroundColor: 'orange'
   },
   containerDisabled: {
-    backgroundColor: 'lightgray',
-    borderRadius: 3
+    backgroundColor: 'lightgray'
   },
   text: {
     fontSize: 60,

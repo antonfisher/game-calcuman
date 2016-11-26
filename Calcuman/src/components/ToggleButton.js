@@ -142,21 +142,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#a5d9e5',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 7,
+    margin: 15,
     padding: 5,
     paddingBottom: 7,
-    margin: 15
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: 'rgba(255,255,255,.5)'
   },
   containerPressed: {
     backgroundColor: '#FFDA31',
-    borderRadius: 10,
     padding: 10,
     paddingBottom: 14,
     margin: 10
   },
   containerDisabled: {
     backgroundColor: 'lightgray',
-    borderRadius: 3,
     margin: 25
   },
   text: {

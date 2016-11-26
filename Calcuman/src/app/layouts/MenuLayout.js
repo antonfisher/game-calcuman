@@ -94,14 +94,25 @@ const styles = StyleSheet.create({
   },
   maxScoreTitle: {
     color: 'gray',
-    fontSize: 13
+    fontSize: 16,
+    lineHeight: 15,
+    textShadowRadius: 1,
+    textShadowColor: '#aaaaaa',
+    textShadowOffset: {width: 1, height: 1}
   },
   maxScoreText: {
     fontWeight: 'bold',
-    fontSize: 50
+    fontSize: 50,
+    lineHeight: 49,
+    textShadowRadius: 2,
+    textShadowColor: '#aaaaaa',
+    textShadowOffset: {width: 2, height: 2}
   },
   versionText: {
     color: 'gray',
-    fontSize: 11
+    fontSize: 11,
+    textShadowRadius: 1,
+    textShadowColor: '#aaaaaa',
+    textShadowOffset: {width: 1, height: 1}
   }
 })
