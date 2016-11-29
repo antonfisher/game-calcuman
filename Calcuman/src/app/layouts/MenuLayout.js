@@ -39,7 +39,7 @@ export default class MenuLayout extends Component {
 
   render () {
     return (
-      <Image source={require('./img/background-80.png')} style={styles.container}>
+      <Image source={require('./img/background.png')} style={styles.container}>
         <View style={styles.topBar}>
           <MuteButton
             soundsManager={this.props.soundsManager}
