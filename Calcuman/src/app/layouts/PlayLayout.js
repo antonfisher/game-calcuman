@@ -155,7 +155,7 @@ export default class PlayLayout extends Component {
     }
 
     return (
-      <Image source={require('./img/background-80.png')} style={styles.container}>
+      <Image source={require('./img/background.png')} style={styles.container}>
         <View style={styles.topBar}>
           <IconButton
             name={'arrow-back'}

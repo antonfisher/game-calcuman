@@ -5,13 +5,13 @@
 import arrayShuffle from '../functions/arrayShuffle.js'
 
 const GAME_INIT_TIMEOUT_SEC = 10
-const GAME_TIMEOUT_INCREASE = 3
 
 export default class Game {
   constructor ({targetNum, onTimeOverCallback, onTickCallback}) {
     this.targetNum = (targetNum || 0)
     this.onTimeOverCallback = onTimeOverCallback
     this.onTickCallback = onTickCallback
+    this.buttonsUsedCount = 0
     this.timeout = GAME_INIT_TIMEOUT_SEC
     this.solution = []
   }
@@ -38,18 +38,21 @@ export default class Game {
     this.isWin = false
     this.gameOver = false
     this.targetNum += 1
-    this.timeout += GAME_TIMEOUT_INCREASE
+    this.timeout += (this.buttonsUsedCount + (this.targetNum < 12 ? 1 : 0))
+    this.buttonsUsedCount = 0
     this.values = arrayShuffle(this.generateValues(this.targetNum))
     this.startTimer()
   }
 
   incSum (value) {
     this.sum += value
+    this.buttonsUsedCount += 1
     this.updateState()
   }
 
   decSum (value) {
     this.sum -= value
+    this.buttonsUsedCount -= 1
     this.updateState()
   }
 
@@ -68,10 +71,11 @@ export default class Game {
   getState () {
     return {
       isWin: this.isWin,
-      gameOver: this.gameOver,
       values: this.values,
+      timeout: this.timeout,
+      gameOver: this.gameOver,
       targetNum: this.targetNum,
-      timeout: this.timeout
+      buttonsUsedCount: this.buttonsUsedCount
     }
   }
 
