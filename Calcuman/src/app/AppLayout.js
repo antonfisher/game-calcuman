@@ -15,6 +15,10 @@ import SoundsManager from '../classes/SoundsManager'
 
 const MAX_SCORE_DEFAULT_VALUE = 10
 
+export const ROUTE_INDEX_MENU = 0
+export const ROUTE_INDEX_GAME = 1
+export const ROUTE_INDEX_DEMO = 2
+
 export default class AppLayout extends Component {
   constructor (props) {
     super(props)
@@ -40,9 +44,7 @@ export default class AppLayout extends Component {
   onMaxScoreUpdate (maxScore) {
     if (maxScore > this.state.maxScore) {
       this.storage.setMaxScore(maxScore)
-        .then(() => {
-          this.setState({maxScore})
-        })
+        .then(() => this.setState({maxScore}))
         .done()
     }
   }
@@ -50,9 +52,9 @@ export default class AppLayout extends Component {
   render () {
     return (
       <Navigator
-        initialRoute={{index: 0}}
+        initialRoute={{index: ROUTE_INDEX_MENU}}
         renderScene={(route, navigator) => {
-          if (route.index === 0) {
+          if (route.index === ROUTE_INDEX_MENU) {
             return (
               <MenuLayout
                 navigator={navigator}
@@ -63,6 +65,7 @@ export default class AppLayout extends Component {
           } else {
             return (
               <PlayLayout
+                demo={route.index === ROUTE_INDEX_DEMO}
                 ga={this.ga}
                 navigator={navigator}
                 muted={this.state.muted}

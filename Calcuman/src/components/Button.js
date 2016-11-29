@@ -11,16 +11,20 @@ export default class Button extends Component {
   static get defaultProps () {
     return {
       value: '',
+      fontSize: 60,
       disabled: true,
-      onClick: function () {}
+      onClick: function () {},
+      background: '#6BC0D5'
     }
   }
 
   static get propTypes () {
     return {
       value: React.PropTypes.string,
+      onClick: React.PropTypes.func,
       disabled: React.PropTypes.bool,
-      onClick: React.PropTypes.func
+      fontSize: React.PropTypes.number,
+      background: React.PropTypes.string
     }
   }
 
@@ -54,8 +58,14 @@ export default class Button extends Component {
   }
 
   render () {
-    const styleText = [styles.text]
-    const styleContainer = [styles.container]
+    const styleText = [styles.text, {
+      fontSize: this.props.fontSize
+    }]
+
+    const styleContainer = [styles.container, {
+      backgroundColor: this.props.background
+    }]
+
     if (this.props.disabled) {
       styleText.push(styles.textDisabled)
       styleContainer.push(styles.containerDisabled)
@@ -100,7 +110,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray'
   },
   text: {
-    fontSize: 60,
     color: 'white',
     fontWeight: 'bold'
   },

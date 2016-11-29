@@ -8,6 +8,8 @@ import {StyleSheet, View, Image, Text} from 'react-native'
 import Button from '../../components/Button'
 import MuteButton from '../buttons/MuteButton'
 
+import {ROUTE_INDEX_GAME, ROUTE_INDEX_DEMO} from '../AppLayout'
+
 export default class MenuLayout extends Component {
   static get defaultProps () {
     return {
@@ -27,13 +29,22 @@ export default class MenuLayout extends Component {
 
   onPlayClick () {
     this.props.soundsManager.play('toggle_off')
-    this.props.navigator.push({index: 1})
+    this.props.navigator.push({index: ROUTE_INDEX_GAME})
+  }
+
+  onDemoClick () {
+    this.props.soundsManager.play('toggle_off')
+    this.props.navigator.push({index: ROUTE_INDEX_DEMO})
   }
 
   render () {
     return (
-      <Image source={require('./img/background-60.png')} style={styles.container}>
-        <View style={styles.logo} />
+      <Image source={require('./img/background-80.png')} style={styles.container}>
+        <View style={styles.topBar}>
+          <MuteButton
+            soundsManager={this.props.soundsManager}
+            muted={this.props.muted} />
+        </View>
         <View style={styles.menuContainer}>
           <View style={styles.menuItem}>
             <Button
@@ -41,14 +52,17 @@ export default class MenuLayout extends Component {
               onClick={this.onPlayClick.bind(this)}
               disabled={false} />
           </View>
+          <View style={styles.menuItem}>
+            <Button
+              value={'HOW TO PLAY?'}
+              fontSize={15}
+              background={'lightsteelblue'}
+              onClick={this.onDemoClick.bind(this)}
+              disabled={false} />
+          </View>
           <View style={styles.manuScoreItem}>
             <Text style={styles.maxScoreTitle}>Max score:</Text>
             <Text style={styles.maxScoreText}>{this.props.maxScore}</Text>
-          </View>
-          <View style={styles.menuItem}>
-            <MuteButton
-              soundsManager={this.props.soundsManager}
-              muted={this.props.muted} />
           </View>
           <View style={styles.versionItem}>
             <Text style={styles.versionText}>v1.0.2</Text>
@@ -66,14 +80,20 @@ const styles = StyleSheet.create({
     height: null,
     resizeMode: Image.resizeMode.stretch
   },
-  logo: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  topBar: {
+    height: 60,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingLeft: 1,
+    paddingRight: 3,
+    marginBottom: 15
   },
   menuContainer: {
     flex: 4,
     margin: 20,
+    marginTop: 50,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'

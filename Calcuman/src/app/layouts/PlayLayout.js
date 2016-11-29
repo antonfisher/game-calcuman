@@ -21,6 +21,7 @@ const LOSE_SCREEN_DELAY = 1500
 export default class PlayLayout extends Component {
   static get defaultProps () {
     return {
+      demo: false,
       muted: false,
       buttonColors: [
         'lightsteelblue',
@@ -34,6 +35,7 @@ export default class PlayLayout extends Component {
   static get propTypes () {
     return {
       ga: React.PropTypes.object,
+      demo: React.PropTypes.bool,
       muted: React.PropTypes.bool,
       navigator: React.PropTypes.object,
       buttonColors: React.PropTypes.array,
@@ -45,6 +47,8 @@ export default class PlayLayout extends Component {
   constructor (props) {
     super(props)
 
+    const {demo, buttonColors} = this.props
+
     this.game = new Game({
       targetNum: START_NUMBER - 1,
       onTimeOverCallback: this.updateGameState.bind(this),
@@ -55,10 +59,7 @@ export default class PlayLayout extends Component {
 
     this.state = {
       ...this.game.getState(),
-      ...{
-        demo: true,
-        buttonColor: this.props.buttonColors[0]
-      }
+      ...{demo, buttonColor: buttonColors[0]}
     }
 
     // weird
