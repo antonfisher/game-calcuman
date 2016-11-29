@@ -65,7 +65,7 @@ export default class MenuLayout extends Component {
             <Text style={styles.maxScoreText}>{this.props.maxScore}</Text>
           </View>
           <View style={styles.versionItem}>
-            <Text style={styles.versionText}>v1.0.2</Text>
+            <Text style={styles.versionText}>v1.0.3</Text>
           </View>
         </View>
       </Image>
