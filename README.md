@@ -11,5 +11,5 @@ Try on [Google Play](https://play.google.com/store/apps/details?id=com.calcuman)
 ![Score 20](https://raw.githubusercontent.com/antonfisher/game-calcuman/docs/images/resized/ss-20.png)
 
 ## ToDo:
-- [x] restrict horizontal view
 - [ ] tablets
+- [ ] ad

@@ -60,7 +60,7 @@ export default class MenuLayout extends Component {
               onClick={this.onDemoClick.bind(this)}
               disabled={false} />
           </View>
-          <View style={styles.manuScoreItem}>
+          <View style={styles.menuScoreItem}>
             <Text style={styles.maxScoreTitle}>Max score:</Text>
             <Text style={styles.maxScoreText}>{this.props.maxScore}</Text>
           </View>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flexDirection: 'row'
   },
-  manuScoreItem: {
+  menuScoreItem: {
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
@@ -115,15 +115,15 @@ const styles = StyleSheet.create({
   maxScoreTitle: {
     color: 'gray',
     fontSize: 16,
-    lineHeight: 15,
+    lineHeight: 17,
     textShadowRadius: 1,
     textShadowColor: '#aaaaaa',
     textShadowOffset: {width: 1, height: 1}
   },
   maxScoreText: {
     fontWeight: 'bold',
-    fontSize: 50,
-    lineHeight: 49,
+    fontSize: 55,
+    lineHeight: 50,
     textShadowRadius: 2,
     textShadowColor: '#aaaaaa',
     textShadowOffset: {width: 2, height: 2}
